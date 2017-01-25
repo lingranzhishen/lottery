@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd"
+       default-autowire="byName" default-lazy-init="false">
+
+    <context:property-placeholder location="classpath:httpclient.properties" ignore-unresolvable="true"/>
+	<!-- 自动扫描且不扫描@Controller-->
+	<context:component-scan base-package="com.dhu">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	
+	<!-- 启用spring 注解 -->
+	<context:annotation-config />
+	<!-- 自动任务 -->
+	<task:executor id="executor" pool-size="100" keep-alive="300" queue-capacity="200"/>
+    <task:scheduler id="scheduler" pool-size="100"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler"/>
+    
+     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+        <property name="protocol" value="smtp" />  
+        <property name="host" value="smtp.qq.com" />  
+        <property name="port" value="465" />  
+        <property name="username" value="280146985@qq.com" />  
+        <property name="password" value="lzh523588" />  
+          
+        <property name="javaMailProperties">  
+            <props>  
+                <prop key="mail.smtp.auth">true</prop>  
+                <prop key="mail.smtp.starttls.enable">true</prop>  
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>  
+            </props>  
+        </property>  
+    </bean>  
+    <!--RestTemplate-->
+    <bean id="api.requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+        <property name="readTimeout" value="20000"/>
+        <property name="connectTimeout" value="20000"/>
+    </bean>
+    <bean id="apiRestTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="api.requestFactory"/>
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                            <value>text/html;charset=utf-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+	<!-- 读多个配置文件 -->
+	<bean id="propertyConfigurer"
+		class="com.dhu.common.PropertyConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:global.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+	<!-- dbcp连接池 -->
+	<bean id="dataSource_main" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${${env}.online.jdbc.driver}" />
+		<property name="url" value="${${env}.online.jdbc.url}" />
+		<property name="username" value="${${env}.online.jdbc.username}" />
+		<property name="password" value="${${env}.online.jdbc.password}" />
+		<property name="initialSize" value="20" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="10" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+	
+	<!-- 配置事务 -->		
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource_main" />
+	
+	<tx:annotation-driven />
+	    
+    <bean id="pfpSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_main" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="com.dhu.lottery.model" />
+		<property name="mapperLocations" >
+            <list>
+                <value>classpath:mybatis/*.xml</value>
+            </list>
+        </property>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="pfpSqlSessionFactory" />
+    </bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="pfpSqlSessionFactory" />
+		<property name="basePackage" value="com.dhu.lottery.dao" />
+	</bean>
+	
+	<!-- freemarker模板 -->
+	<bean id="freeMarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPaths">
+			<list>
+				<value>classpath:freemarker/</value>
+			</list>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">0</prop>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="number_format">0.######</prop>
+				<prop key="classic_compatible">true</prop>
+			</props>
+		</property>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape" />
+			</map>
+		</property>
+	</bean>
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+	<bean id="fkUtil" class="com.dhu.common.util.FreemarkerUtil"/>
+	<bean id="springContextUtil" class="com.dhu.common.util.SpringContextUtil"></bean>
+	<!-- 定义连接管理器 -->
+	<bean id="httpClientConnectionManager"
+		class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager"
+		destroy-method="close">
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="${http.maxTotal}" />
+
+		<!-- 设置每个主机地址的并发数 -->
+		<property name="defaultMaxPerRoute" value="${http.defaultMaxPerRoute}" />
+	</bean>
+
+	<!-- httpclient对象构建器 -->
+	<bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
+		<!-- 设置连接管理器 -->
+		<property name="connectionManager" ref="httpClientConnectionManager" />
+	</bean>
+
+	<!-- 定义Httpclient对象 -->
+	<bean id="httpClient" class="org.apache.http.impl.client.CloseableHttpClient"
+		factory-bean="httpClientBuilder" factory-method="build" scope="prototype">
+	</bean>
+
+
+	<bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
+		<!-- 创建连接的最长时间 -->
+		<property name="connectTimeout" value="${http.connectTimeout}"/>
+		<!-- 从连接池中获取到连接的最长时间 -->
+		<property name="connectionRequestTimeout" value="${http.connectionRequestTimeout}"/>
+		<!-- 数据传输的最长时间 -->
+		<property name="socketTimeout" value="${http.socketTimeout}"/>
+		<!-- 提交请求前测试连接是否可用 -->
+		<property name="staleConnectionCheckEnabled" value="${http.staleConnectionCheckEnabled}"/>
+	</bean>
+	<!-- 定义请求参数 -->
+	<bean id="requestConfig" class="org.apache.http.client.config.RequestConfig" factory-bean="requestConfigBuilder" factory-method="build">
+	</bean>
+	<!-- 引入jar包中的配置 -->
+	<!-- <import resource="spring-cache.xml"/> -->
+	<import resource="spring-ljframework.xml"/>
+	
+</beans>
