@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <!-- 注解解析AOP -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 手动获取spring的bean -->
+    <bean class="com.dhu.framework.utils.SpringContextHolder" scope="singleton" lazy-init="false"/>
+    
+    <!-- 任务调度中心HttpInvoker -->
+    <bean id="taskClientHik" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <!-- 远程服务的url -->
+        <property name="serviceUrl" value="${task.centerurl}"/>
+        <!-- 远程服务所实现的接口 -->
+        <property name="serviceInterface" value="com.dhu.framework.jobmanage.ITaskDispatchFacade"/>
+        <property name="httpInvokerRequestExecutor">
+            <bean class="org.springframework.remoting.httpinvoker.SimpleHttpInvokerRequestExecutor">
+                <property name="connectTimeout" value="5000"/>
+                <property name="readTimeout" value="5000"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <!-- AOP -->
+    <bean class="com.dhu.framework.cache.CacheAspect" scope="singleton"/>
+    <bean class="com.dhu.framework.jobmanage.TaskDispatchAspect" scope="singleton"/>
+    
+    <!--  EHCache缓存配置-->
+    <bean id="plusehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" scope="singleton">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+    </bean>
+    <bean id="ljehcache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" scope="singleton">
+        <property name="cacheManager" ref="plusehcacheManager"/>
+        <property name="cacheName" value="ljehcachefile"/>
+    </bean>
+    <bean id="ehcacheManager" class="com.dhu.framework.cache.impl.EhCacheManger" scope="singleton"/>
+    <bean id="memcacheManager" class="com.dhu.framework.cache.impl.MemCacheManager" scope="singleton"/>
+    <bean id="rediscacheManager" class="com.dhu.framework.cache.impl.RedisCacheManager" scope="singleton"/>
+    
+</beans>

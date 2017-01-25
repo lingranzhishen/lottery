@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	
+	<!-- memcache配置示例 -->
+    <bean name="ljmemcachedClient" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+    	<!-- 多个地址空格分隔 -->
+		<property name="servers" value="${cache.memcacheAddress}" />
+		<!-- 连接池大小一般5已经足够用,根据项目组实际情况调整 -->
+		<property name="connectionPoolSize" value="${cache.memcachePoolSize}" />
+		<!-- 一致哈希分布 -->
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+		</property>
+		<!-- 二进制协议,提高数据传输效率,支持touch等 -->
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean>
+		</property>
+	</bean>
+</beans>

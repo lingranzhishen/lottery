@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+	<!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)-->
+	<appender name="INFO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	    <level>INFO</level>
+	  </filter>
+	  <file>${catalina.base}/logs/info</file>
+	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <fileNamePattern>${catalina.base}/logs/info.%d{yyyy-MM-dd}</fileNamePattern>
+	    <maxHistory>30</maxHistory>
+	  </rollingPolicy>
+	  <encoder>
+	    <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	  </encoder>
+	</appender>
+	
+	<appender name="ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	    <level>ERROR</level>
+	  </filter>
+	  <file>${catalina.base}/logs/error</file>
+	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <fileNamePattern>${catalina.base}/logs/error.%d{yyyy-MM-dd}</fileNamePattern>
+	    <maxHistory>30</maxHistory>
+	  </rollingPolicy>
+	  <encoder>
+	    <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	  </encoder>
+	</appender>
+  
+	<root level="INFO">
+		<appender-ref ref="INFO-FILE" />
+    	<appender-ref ref="ERROR-FILE" />
+	</root> 
+</configuration>
