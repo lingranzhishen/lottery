@@ -5,9 +5,9 @@
 	  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 	    <level>INFO</level>
 	  </filter>
-	  <file>/home/online/log/agent/info</file>
+	  <file>${catalina.base}/logs/info</file>
 	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-	    <fileNamePattern>/home/online/log/agent/info.%d{yyyy-MM-dd}</fileNamePattern>
+	    <fileNamePattern>${catalina.base}/logs/info.%d{yyyy-MM-dd}</fileNamePattern>
 	    <maxHistory>30</maxHistory>
 	  </rollingPolicy>
 	  <encoder>
@@ -19,9 +19,9 @@
 	  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 	    <level>ERROR</level>
 	  </filter>
-	  <file>/home/online/log/agent/error</file>
+	  <file>${catalina.base}/logs/error</file>
 	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-	    <fileNamePattern>/home/online/log/agent/error.%d{yyyy-MM-dd}</fileNamePattern>
+	    <fileNamePattern>${catalina.base}/logs/error.%d{yyyy-MM-dd}</fileNamePattern>
 	    <maxHistory>30</maxHistory>
 	  </rollingPolicy>
 	  <encoder>

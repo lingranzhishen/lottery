@@ -287,6 +287,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
 	<!-- 插件配置 -->
 	<build>
 		<finalName>ROOT</finalName>
