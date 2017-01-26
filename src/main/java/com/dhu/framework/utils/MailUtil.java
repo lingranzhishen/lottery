@@ -27,9 +27,7 @@ public class MailUtil {
 		helper.setFrom("280146985@qq.com");
 		helper.setSubject("彩票提醒！！！");
 		helper.setText(msg, true);
-
 		// 发送邮件
 		mailSender.send(mailMessage);
-		System.out.println("邮件发送成功.. ");
 	}
 }
