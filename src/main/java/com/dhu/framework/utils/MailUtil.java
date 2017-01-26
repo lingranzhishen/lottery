@@ -24,12 +24,10 @@ public class MailUtil {
 		// 设置收件人,群发邮件
 		String[] array = new String[] { "280146985@qq.com" };
 		helper.setTo(array);
-		helper.setFrom("280146985@qq.com");
+		helper.setFrom("lingranzhishen@163.com");
 		helper.setSubject("彩票提醒！！！");
 		helper.setText(msg, true);
-
 		// 发送邮件
 		mailSender.send(mailMessage);
-		System.out.println("邮件发送成功.. ");
 	}
 }
