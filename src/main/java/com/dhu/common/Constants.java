@@ -28,5 +28,5 @@ public class Constants {
 	public static final int SMALL_TYPE=4;
 	public static final int BIG_TYPE=5;
 	public static final int[] MISS_TYPE={EVEN_TYPE,ODD_TYPE,SMALL_TYPE,BIG_TYPE};
-	public static final String[] DIGIT_NAME={"个","十","百","千","万"};
+	public static final String[] DIGIT_NAME={"万","千","百","十","个"};
 }
