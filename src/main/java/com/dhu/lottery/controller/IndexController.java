@@ -27,6 +27,15 @@ public class IndexController extends BaseController {
 	public String index(HttpServletResponse response) {
 		return "index";
 	}
+	
+	@RequestMapping(value = "preProduct")
+	public String preProduct(HttpServletResponse response) {
+		return "preProduct";
+	}
+	@RequestMapping(value = "product")
+	public String product(HttpServletResponse response) {
+		return "product";
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/testMail.json")
