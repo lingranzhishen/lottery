@@ -16,7 +16,7 @@ public class CommonFunctions {
 			for (int i = 0; i < records.size(); i++) {
 				lr = records.get(i);
 				if (type <= Constants.ODD_TYPE) {
-					if (type != getEvenOrOddType(lr.getNumber(), x)) {
+					if (type == getEvenOrOddType(lr.getNumber(), x)) {
 						missNum++;
 						if (type == Constants.EVEN_TYPE) {
 							if (missNum == Constants.MAX_ODD_MISS) {
