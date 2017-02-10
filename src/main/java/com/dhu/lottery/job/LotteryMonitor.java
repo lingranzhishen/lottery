@@ -22,7 +22,7 @@ public class LotteryMonitor {
 	@Autowired
 	MailUtil mailUtil;
 
-	@Scheduled(cron = "0 0/3 * * * ?")
+	@Scheduled(cron = "0 0/1 * * * ?")
 	public void monitorLottery() {
 		logger.info("彩票监控开始！！！");
 		String lastestLottery = lotteryRecordService.insertLotteryRecord();
