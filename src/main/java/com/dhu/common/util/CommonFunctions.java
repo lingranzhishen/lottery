@@ -18,6 +18,7 @@ public class CommonFunctions {
 				if (type <= Constants.ODD_TYPE) {
 					if (type == getEvenOrOddType(lr.getNumber(), x)) {
 						missNum++;
+					} else {
 						if (type == Constants.EVEN_TYPE) {
 							if (missNum == Constants.MAX_ODD_MISS) {
 								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次奇数遗漏;");
@@ -29,12 +30,24 @@ public class CommonFunctions {
 								break;
 							}
 						}
-					} else {
-						break;
+					}
+					if (i == records.size() - 1) {
+						if (type == Constants.EVEN_TYPE) {
+							if (missNum == Constants.MAX_ODD_MISS) {
+								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次奇数遗漏;");
+								break;
+							}
+						} else {
+							if (missNum == Constants.MAX_EVEN_MISS) {
+								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次偶数遗漏;");
+								break;
+							}
+						}
 					}
 				} else {
 					if (type != getBigOrSmallType(lr.getNumber(), x)) {
 						missNum++;
+					} else {
 						if (type == Constants.BIG_TYPE) {
 							if (missNum == Constants.MAX_BIG_MISS) {
 								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次大数遗漏;");
@@ -46,8 +59,19 @@ public class CommonFunctions {
 								break;
 							}
 						}
-					} else {
-						break;
+					}
+					if (i == records.size() - 1) {
+						if (type == Constants.BIG_TYPE) {
+							if (missNum == Constants.MAX_BIG_MISS) {
+								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次大数遗漏;");
+								break;
+							}
+						} else {
+							if (missNum == Constants.MAX_SMALL_MISS) {
+								stringBuilder.append("第" + Constants.DIGIT_NAME[x % 5] + "位已经有" + missNum + "次小数遗漏;");
+								break;
+							}
+						}
 					}
 				}
 			}
