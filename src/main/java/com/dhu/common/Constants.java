@@ -18,7 +18,6 @@ public class Constants {
 
 	public static final String HEAD_FUFFIX = "_150x200.jpg";// 头像的后缀
 	public static final String PC_TOKEN_NAME = "dhu_token";
-
 	public static final int MAX_ODD_MISS = 10;// 最大偶数遗漏
 	public static final int MAX_EVEN_MISS = 10;// 最大奇数遗漏
 	public static final int MAX_BIG_MISS = 10;// 最大大遗漏
