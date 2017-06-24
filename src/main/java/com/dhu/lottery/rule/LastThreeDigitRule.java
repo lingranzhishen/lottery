@@ -2,6 +2,8 @@ package com.dhu.lottery.rule;
 
 import com.dhu.common.Constants;
 import com.dhu.lottery.model.LotteryRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
  */
 @Component
 public class LastThreeDigitRule extends AbstractLotteryRule {
-
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	private String matchResult;
 
 	@Override
@@ -39,6 +41,8 @@ public class LastThreeDigitRule extends AbstractLotteryRule {
 				int missNum=isMiss(lotteryRecords,a,b);
 				if(missNum>= Constants.MAX_LAST_THREE_MISS){
 					stringBuilder.append(a+","+b+"后三遗漏"+missNum+"次");
+				}else{
+					logger.info(a+","+b+"后三遗漏"+missNum+"次");
 				}
 			}
 		}
