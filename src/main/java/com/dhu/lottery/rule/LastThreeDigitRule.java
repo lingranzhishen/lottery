@@ -42,7 +42,7 @@ public class LastThreeDigitRule extends AbstractLotteryRule {
 				if(missNum>= Constants.MAX_LAST_THREE_MISS){
 					stringBuilder.append(a+","+b+"后三遗漏"+missNum+"次");
 				}else{
-					logger.info(a+","+b+"后三遗漏"+missNum+"次");
+					//logger.info(a+","+b+"后三遗漏"+missNum+"次");
 				}
 			}
 		}

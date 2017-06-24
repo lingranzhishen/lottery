@@ -29,5 +29,5 @@ public class Constants {
 	public static final int[] MISS_TYPE={EVEN_TYPE,ODD_TYPE,SMALL_TYPE,BIG_TYPE};
 	public static final String[] DIGIT_NAME={"万","千","百","十","个"};
 
-	public static final int MAX_LAST_THREE_MISS = 10;// 后三组三遗漏
+	public static final int MAX_LAST_THREE_MISS = 20;// 后三组三遗漏
 }
