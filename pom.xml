@@ -5,7 +5,7 @@
 	<artifactId>UC</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>webAgentCenter</name>
+	<name>lottery</name>
 
 	<properties>
 		<spring.version>4.0.0.RELEASE</spring.version>
