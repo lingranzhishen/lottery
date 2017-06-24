@@ -311,6 +311,11 @@
 					<groupId>org.mortbay.jetty</groupId>
 					<artifactId>maven-jetty-plugin</artifactId>
 					<version>6.1.10</version>
+					<configuration>
+						<contextPath>/</contextPath>
+						<stopKey>stop</stopKey>
+						<stopPort>8089</stopPort>
+					</configuration>
 				</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
