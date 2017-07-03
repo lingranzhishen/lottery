@@ -35,24 +35,30 @@ public class LastThreeDigitRule extends AbstractLotteryRule {
 
 	private String getMatchResult(List<LotteryRecord> lotteryRecords){
 		StringBuilder stringBuilder=new StringBuilder();
-		for(int a=0; a<10; a++){
-			for(int b=0; b<10; b++){
-				if(a==b)continue;
-				int missNum=isMiss(lotteryRecords,a,b);
-				if(missNum>= Constants.MAX_LAST_THREE_MISS){
-					stringBuilder.append(a+","+b+"后三遗漏"+missNum+"次");
-				}else{
-					//logger.info(a+","+b+"后三遗漏"+missNum+"次");
+		for(int f=0; f<5; f++)
+			for(int s=f+1;s<5;s++)
+				for(int t=s+1;t<5; t++) {
+					for (int a = 0; a < 10; a++) {
+						for (int b = a; b < 10; b++) {
+							if (a == b) continue;
+							int missNum = isMiss(lotteryRecords, a, b,f,s,t);
+							if (missNum >= Constants.MAX_LAST_THREE_MISS) {
+								stringBuilder.append(a + "_" + b+","+Constants.DIGIT_NAME[f]+"_"+Constants.DIGIT_NAME[s]+"_"+Constants.DIGIT_NAME[t] +"遗漏" + missNum + "次");
+							} else {
+								if(missNum>=15){
+									logger.info(a + "_" + b+","+Constants.DIGIT_NAME[f]+"_"+Constants.DIGIT_NAME[s]+"_"+Constants.DIGIT_NAME[t] +"遗漏" + missNum + "次");
+								}
+							}
+						}
+					}
 				}
-			}
-		}
 
 		return stringBuilder.toString();
 	}
-	private int isMiss(List<LotteryRecord>lotteryRecords,int a,int b){
+	private int isMiss(List<LotteryRecord>lotteryRecords,int a,int b,int f,int s,int t){
 		int missNum=0;
 		for(LotteryRecord lotteryRecord:lotteryRecords){
-			if(isMiss(lotteryRecord,a,b)){
+			if(isMiss(lotteryRecord,a,b,f,s,t)){
 				missNum++;
 			}else{
 				return missNum;
@@ -61,8 +67,8 @@ public class LastThreeDigitRule extends AbstractLotteryRule {
 		return missNum;
 	}
 
-	private boolean isMiss(LotteryRecord lotteryRecord,int a,int b){
-		String lastThreeNum=lotteryRecord.getNumber().substring(1);
+	private boolean isMiss(LotteryRecord lotteryRecord,int a,int b,int f,int s,int t){
+		String lastThreeNum=""+lotteryRecord.getNumber().charAt(f)+lotteryRecord.getNumber().charAt(s)+lotteryRecord.getNumber().charAt(t);
 		if(lastThreeNum.contains(String.valueOf(a))||lastThreeNum.contains(String.valueOf(b))){
 			return true;
 		}
