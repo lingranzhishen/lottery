@@ -30,4 +30,5 @@ public class Constants {
 	public static final String[] DIGIT_NAME={"万","千","百","十","个"};
 
 	public static final int MAX_LAST_THREE_MISS = 19;// 后三组三遗漏
+	public static final int MAX_120_MISS = 20;//120遗漏
 }
