@@ -41,10 +41,10 @@ public class LastThreeDigitRule extends AbstractLotteryRule {
                         for (int b = a; b < 10; b++) {
                             if (a == b) continue;
                             int missNum = isMiss(lotteryRecords, a, b, f, s, t);
-                            if (missNum >= Constants.MAX_LAST_THREE_MISS) {
+                            if (missNum >= getNumber()) {
                                 stringBuilder.append(a + "_" + b + "," + Constants.DIGIT_NAME[f] + "_" + Constants.DIGIT_NAME[s] + "_" + Constants.DIGIT_NAME[t] + "遗漏" + missNum + "次");
                             } else {
-                                if (missNum >= 15) {
+                                if (missNum >=getLoggingMissNumber()) {
                                     logger.info(a + "_" + b + "," + Constants.DIGIT_NAME[f] + "_" + Constants.DIGIT_NAME[s] + "_" + Constants.DIGIT_NAME[t] + "遗漏" + missNum + "次");
                                 }
                             }

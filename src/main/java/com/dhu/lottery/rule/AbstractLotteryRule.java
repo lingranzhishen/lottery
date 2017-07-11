@@ -1,9 +1,10 @@
 package com.dhu.lottery.rule;
 
-import java.util.List;
-
+import com.dhu.common.Constants;
 import com.dhu.lottery.model.LotteryRecord;
 import com.dhu.lottery.model.LotteryRule;
+
+import java.util.List;
 
 public abstract class AbstractLotteryRule implements ILotteryRule {
 
@@ -21,9 +22,17 @@ public abstract class AbstractLotteryRule implements ILotteryRule {
 
 	@Override
 	public Integer getNumber() {
+		if(lotteryRule.getNumber()==null){
+			return Constants.MAX_BIG_MISS;
+		}
 		return lotteryRule.getNumber();
 	}
-
+	public Integer getLoggingMissNumber() {
+		if(lotteryRule.getNumber()==null){
+			return Constants.MAX_BIG_MISS-5;
+		}
+		return lotteryRule.getNumber()-5;
+	}
 	@Override
 	public abstract boolean isMatch(List<LotteryRecord> record);
 

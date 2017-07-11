@@ -1,7 +1,5 @@
 package com.dhu.lottery.rule;
 
-import com.dhu.common.Constants;
-import com.dhu.common.util.CommonFunctions;
 import com.dhu.lottery.model.LotteryRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +17,7 @@ public class Digit120Rule extends AbstractLotteryRule {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     private String matchResult;
+
 
     @Override
     public boolean isMatch(List<LotteryRecord> record) {
@@ -53,10 +52,10 @@ public class Digit120Rule extends AbstractLotteryRule {
             }
             missNum++;
         }
-        if (missNum >= Constants.MAX_LAST_THREE_MISS) {
+        if (missNum >= getNumber()) {
             return "120遗漏" + missNum + "次";
         }
-        if (missNum >= 15) {
+        if (missNum >= getLoggingMissNumber()) {
             logger.info("120遗漏" + missNum + "次");
         }
         return "";
