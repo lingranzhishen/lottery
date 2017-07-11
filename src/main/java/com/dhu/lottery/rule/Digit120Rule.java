@@ -21,6 +21,7 @@ public class Digit120Rule extends AbstractLotteryRule {
 
     @Override
     public boolean isMatch(List<LotteryRecord> record) {
+        logger.info("120监控次数"+getNumber());
         matchResult = getMatchResult(record);
         if (matchResult.length() > 0) {
             return true;
