@@ -33,7 +33,9 @@ public class LotteryRecordService {
 		List<ILotteryRule> ruleList = new ArrayList<>();
 		if (rules != null) {
 			for (LotteryRule lr : rules) {
-				ruleList.add((ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode()));
+				ILotteryRule ruleBean=(ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode());
+				ruleBean.setLotteryRule(lr);
+				ruleList.add(ruleBean);
 			}
 		}
 		StringBuilder result = new StringBuilder();
