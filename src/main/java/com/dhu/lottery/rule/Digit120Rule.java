@@ -43,15 +43,11 @@ public class Digit120Rule extends AbstractLotteryRule {
     private String isMiss(List<LotteryRecord> lotteryRecords) {
         int missNum = 0;
         for (LotteryRecord lr : lotteryRecords) {
-            char []nums=lr.getNumber().toCharArray();
-            for(int i=0; i<nums.length; i++){
-                for(int j=i+1; j<nums.length; j++){
-                    if(nums[i]==nums[j]){
-                        return "";
-                    }
-                }
-            }
-            missNum++;
+          if(isMatch120(lr.getNumber())) {
+             break;
+          }else{
+              missNum++;
+          }
         }
         if (missNum >= getNumber()) {
             return "120遗漏" + missNum + "次";
@@ -62,4 +58,15 @@ public class Digit120Rule extends AbstractLotteryRule {
         return "";
     }
 
+    private boolean isMatch120(String number) {
+        char[] nums = number.toCharArray();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] == nums[j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
