@@ -30,7 +30,7 @@ public class LotteryMonitor {
 			String result = lotteryRecordService.getLotteryMiss();
 			if (StringUtil.isNotEmpty(result)) {
 				try {
-					mailUtil.sendTextMail(result);
+					mailUtil.sendTextMail(lastestLottery+","+result);
 				} catch (MessagingException e) {
 					e.printStackTrace();
 				}
