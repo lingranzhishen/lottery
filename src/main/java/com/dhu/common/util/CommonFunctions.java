@@ -90,4 +90,16 @@ public class CommonFunctions {
 		}
 		return Constants.SMALL_TYPE;
 	}
+
+	public static boolean isAllEvenOrOdd(int a,int b,int c){
+		return a%2==b%2&&a%2==c%2;
+	}
+
+	public static boolean isAllBigOrSmall(int a,int b,int c){
+		return a/5==a/5&&a/5==c/5;
+	}
+
+	public static boolean isCombinationThree(int a,int b,int c){
+		return a==b||b==c||a==c;
+	}
 }
