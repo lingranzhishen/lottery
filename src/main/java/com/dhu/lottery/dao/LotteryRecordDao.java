@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.dhu.lottery.model.LotteryMiss;
 import com.dhu.lottery.model.LotteryRecord;
 import com.dhu.lottery.model.LotteryRule;
 
@@ -16,4 +17,10 @@ public interface LotteryRecordDao {
 	List<LotteryRule> getAllRule();
 
 	int exists(String lastestPhase);
+
+	int updateLotteryMiss();
+
+	void insertLotteryMiss(LotteryMiss lm);
+
+	List<LotteryMiss> getAllLotteryMiss();
 }

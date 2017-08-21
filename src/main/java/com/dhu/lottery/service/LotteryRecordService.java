@@ -14,6 +14,7 @@ import com.dhu.common.HttpUtil;
 import com.dhu.common.util.SpringContextUtil;
 import com.dhu.common.util.StringUtil;
 import com.dhu.lottery.dao.LotteryRecordDao;
+import com.dhu.lottery.model.LotteryMiss;
 import com.dhu.lottery.model.LotteryRecord;
 import com.dhu.lottery.model.LotteryRule;
 import com.dhu.lottery.rule.ILotteryRule;
@@ -84,4 +85,15 @@ public class LotteryRecordService {
 		return StringUtil.EMPTY;
 	}
 
+	public List<LotteryMiss> getAllLotteryMiss(){
+		return lotteryRecordDao.getAllLotteryMiss();
+	}
+	
+	public void insertLotteryMiss(LotteryMiss lm){
+		 lotteryRecordDao.insertLotteryMiss(lm);
+	}
+	
+	public int updateLotteryMiss(){
+		return lotteryRecordDao.updateLotteryMiss();
+	}
 }
