@@ -14,7 +14,7 @@
 	<update id="updateLotteryMiss">
 	update t_lottery_miss set status=0
 	</update>
-	<select id="getAllLotteryMiss",resultType="lotteryMiss">
+	<select id="getAllLotteryMiss" resultType="lotteryMiss">
 	select m.*,r.number from t_lottery_miss m left join t_lottery_record r
 	on m.lotteryNo=r.lotteryNo
 	 where status=1
