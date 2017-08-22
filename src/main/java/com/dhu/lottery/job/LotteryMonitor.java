@@ -33,16 +33,11 @@ public class LotteryMonitor {
 		if (StringUtil.isNotEmpty(lastestLottery)) {
 			String result = lotteryRecordService.getLotteryMiss();
 			if (StringUtil.isNotEmpty(result)) {
-				try {
-					mailUtil.sendTextMail(lastestLottery + "," + result);
 					LotteryMiss lm = new LotteryMiss();
 					lm.setLotteryNo(lastestLottery);
 					lm.setStatus(1);
 					lm.setMsg(result);
 					lotteryRecordService.insertLotteryMiss(lm);
-				} catch (MessagingException e) {
-					e.printStackTrace();
-				}
 				logger.info("发送邮件！！！");
 				System.out.println("发送邮件！！！");
 			}
