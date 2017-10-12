@@ -94,4 +94,8 @@
 	<select id="exists" resultType="integer">
 	select count(1) from t_lottery_record where lotteryNo=#{lotteryNo}
 	</select>
+	
+	<select id="getAllOptionValues" resultType="string">
+		select optionValue from t_sys_parameter where type=#{type}
+	</select>
 </mapper>

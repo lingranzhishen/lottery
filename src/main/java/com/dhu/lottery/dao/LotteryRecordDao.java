@@ -23,4 +23,6 @@ public interface LotteryRecordDao {
 	void insertLotteryMiss(LotteryMiss lm);
 
 	List<LotteryMiss> getAllLotteryMiss();
+	
+	List<String> getAllOptionValues(String type);
 }
