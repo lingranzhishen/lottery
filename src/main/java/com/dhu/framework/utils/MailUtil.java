@@ -22,7 +22,7 @@ public class MailUtil {
 		MimeMessage mailMessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true, "utf-8");
 		// 设置收件人,群发邮件
-		String[] array = new String[] { "280146985@qq.com" };
+		String[] array = new String[] { "280146985@qq.com","422603135@qq.com" };
 		helper.setTo(array);
 		helper.setFrom("280146985@qq.com");
 		helper.setSubject("彩票提醒！！！");
