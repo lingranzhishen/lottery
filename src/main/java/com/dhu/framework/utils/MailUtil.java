@@ -48,4 +48,18 @@ public class MailUtil {
 		// 发送邮件
 		mailSender.send(mailMessage);
 	}
+	
+	public void sendTextMail(String msg,String email) throws MessagingException {
+		MimeMessage mailMessage = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true, "utf-8");
+		// 设置收件人,群发邮件
+		String[] array={email};
+		logger.info("发送邮件！！！"+JSON.toJSONString(array));
+		helper.setTo(array);
+		helper.setFrom("280146985@qq.com");
+		helper.setSubject("短信提醒");
+		helper.setText(msg, true);
+		// 发送邮件
+		mailSender.send(mailMessage);
+	}
 }

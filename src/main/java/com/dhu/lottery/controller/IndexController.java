@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dhu.common.JsonResult;
 import com.dhu.common.base.BaseController;
 import com.dhu.framework.utils.MailUtil;
+import com.dhu.lottery.service.LotteryRecordService;
 import com.dhu.portal.service.LoginService;
 
 @Controller
@@ -22,6 +23,8 @@ public class IndexController extends BaseController {
 	LoginService loginService;
 	@Autowired
 	MailUtil mailUtil;
+	@Autowired
+	LotteryRecordService lotteryRecordService;
 
 	@RequestMapping(value = "")
 	public String index(HttpServletResponse response) {
@@ -39,13 +42,19 @@ public class IndexController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/testMail.json")
-	public JsonResult index(String msg) {
+	public JsonResult index(String msg,String email) {
 		try {
-			mailUtil.sendTextMail(msg);
+			mailUtil.sendTextMail(msg,email);
 		} catch (MessagingException e) {
 			log.info("发送失败", e);
 		}
 		return ok();
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/lastLottery.json")
+	public JsonResult lastLottery() {
+		JsonResult result=ok();
+		result.put("record", lotteryRecordService.getTodayLotteryRecord());
+		return result;
+	}
 }

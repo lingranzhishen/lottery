@@ -50,6 +50,10 @@ public class LotteryRecordService {
 		}
 		return StringUtil.EMPTY;
 	}
+	public List<LotteryRecord> getTodayLotteryRecord(){
+		return lotteryRecordDao.getTodayLotteryRecord();
+	}
+	
 
 	public String insertLotteryRecord() {
 		try {
