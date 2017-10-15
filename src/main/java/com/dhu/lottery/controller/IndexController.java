@@ -39,9 +39,9 @@ public class IndexController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping(value = "/testMail.json")
-	public JsonResult index(String msg) {
+	public JsonResult index(String msg,String email) {
 		try {
-			mailUtil.sendTextMail(msg);
+			mailUtil.sendTextMail(msg,email);
 		} catch (MessagingException e) {
 			log.info("发送失败", e);
 		}
