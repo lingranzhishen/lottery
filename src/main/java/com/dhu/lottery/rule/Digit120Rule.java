@@ -37,7 +37,36 @@ public class Digit120Rule extends AbstractLotteryRule {
     private String getMatchResult(List<LotteryRecord> lotteryRecords) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(isMiss(lotteryRecords));
+        stringBuilder.append(isMissAgain(lotteryRecords));
         return stringBuilder.toString();
+    }
+
+    private String isMissAgain(List<LotteryRecord> lotteryRecords) {
+        if (lotteryRecords.isEmpty()) {
+            return "";
+        }
+        int firstMiss=0;
+        int secondMiss=0;
+        int missMid=0;
+        for (LotteryRecord lr : lotteryRecords) {
+            if(isMatch120(lr.getNumber())) {
+                if(missMid==0){
+                    missMid=1;
+                }else{
+                    break;
+                }
+            }else{
+                if(missMid==0) {
+                    secondMiss++;
+                }else{
+                    firstMiss++;
+                }
+            }
+        }
+        if(firstMiss>=getNumber()){
+            return "120首次遗漏" + firstMiss + "次,又遗漏"+secondMiss+"次";
+        }
+        return "";
     }
 
     private String isMiss(List<LotteryRecord> lotteryRecords) {
