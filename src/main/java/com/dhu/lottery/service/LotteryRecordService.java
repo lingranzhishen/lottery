@@ -34,9 +34,11 @@ public class LotteryRecordService {
 		List<ILotteryRule> ruleList = new ArrayList<>();
 		if (rules != null) {
 			for (LotteryRule lr : rules) {
-				ILotteryRule ruleBean=(ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode());
-				ruleBean.setLotteryRule(lr);
-				ruleList.add(ruleBean);
+				ILotteryRule ruleBean = (ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode());
+				if (ruleBean != null) {
+					ruleBean.setLotteryRule(lr);
+					ruleList.add(ruleBean);
+				}
 			}
 		}
 		StringBuilder result = new StringBuilder();
@@ -50,10 +52,10 @@ public class LotteryRecordService {
 		}
 		return StringUtil.EMPTY;
 	}
-	public List<LotteryRecord> getTodayLotteryRecord(){
+
+	public List<LotteryRecord> getTodayLotteryRecord() {
 		return lotteryRecordDao.getTodayLotteryRecord();
 	}
-	
 
 	public String insertLotteryRecord() {
 		try {
@@ -67,7 +69,7 @@ public class LotteryRecordService {
 				JSONObject award = awards.getJSONObject(i);
 				LotteryRecord lotteryRecord = new LotteryRecord();
 				String lastestPhase = award.getString("period");
-				if (lotteryRecordDao.exists(lastestPhase) <1) {
+				if (lotteryRecordDao.exists(lastestPhase) < 1) {
 					String lastestNumber = award.getString("winningNumber").replaceAll(" ", StringUtil.EMPTY);
 					lotteryRecord.setCreateTime(new Date());
 					lotteryRecord.setLotteryNo(lastestPhase);
@@ -79,7 +81,7 @@ public class LotteryRecordService {
 					lotteryRecord.setFourthDigit(lastestNumber.charAt(3) - '0');
 					lotteryRecord.setFifthDigit(lastestNumber.charAt(4) - '0');
 					lotteryRecordDao.insertLotteryRecord(lotteryRecord);
-					lotteryNo=lotteryRecord.getLotteryNo();
+					lotteryNo = lotteryRecord.getLotteryNo();
 				}
 			}
 			return lotteryNo;
@@ -89,15 +91,15 @@ public class LotteryRecordService {
 		return StringUtil.EMPTY;
 	}
 
-	public List<LotteryMiss> getAllLotteryMiss(){
+	public List<LotteryMiss> getAllLotteryMiss() {
 		return lotteryRecordDao.getAllLotteryMiss();
 	}
-	
-	public void insertLotteryMiss(LotteryMiss lm){
-		 lotteryRecordDao.insertLotteryMiss(lm);
+
+	public void insertLotteryMiss(LotteryMiss lm) {
+		lotteryRecordDao.insertLotteryMiss(lm);
 	}
-	
-	public int updateLotteryMiss(){
+
+	public int updateLotteryMiss() {
 		return lotteryRecordDao.updateLotteryMiss();
 	}
 }
