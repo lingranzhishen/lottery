@@ -29,7 +29,7 @@ public class LotteryMonitor {
 	@Scheduled(cron = "0 0/1 * * * ?")
 	public void monitorLottery() {
 		logger.info("彩票监控开始！！！");
-		String lastestLottery = lotteryRecordService.insertLotteryRecord();
+		String lastestLottery = lotteryRecordService.insertLotteryRecordV2();
 		if (StringUtil.isNotEmpty(lastestLottery)) {
 			String result = lotteryRecordService.getLotteryMiss();
 			if (StringUtil.isNotEmpty(result)) {

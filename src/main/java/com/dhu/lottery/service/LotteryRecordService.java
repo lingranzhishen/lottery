@@ -57,6 +57,7 @@ public class LotteryRecordService {
 		return lotteryRecordDao.getTodayLotteryRecord();
 	}
 
+	@Deprecated
 	public String insertLotteryRecord() {
 		try {
 
@@ -90,6 +91,43 @@ public class LotteryRecordService {
 		}
 		return StringUtil.EMPTY;
 	}
+
+
+	public String insertLotteryRecordV2() {
+		try {
+
+			String result = httpUtil
+					.doGet("https://www.k8kjw9.com/api/recent?code=cq_ssc");
+			JSONObject jo = JSONObject.parseObject(result);
+			JSONArray awards = jo.getJSONArray("data");
+			String lotteryNo = StringUtil.EMPTY;
+			for (int i = 0; i < awards.size(); i++) {
+				JSONObject award = awards.getJSONObject(i);
+				LotteryRecord lotteryRecord = new LotteryRecord();
+				String lastestPhase = award.getString("issue").substring(2);
+				if (lotteryRecordDao.exists(lastestPhase) < 1) {
+					String lastestNumber = award.getString("code").replaceAll(",", StringUtil.EMPTY);
+					lotteryRecord.setCreateTime(new Date());
+					lotteryRecord.setLotteryNo(lastestPhase);
+					lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase.substring(6)));
+					lotteryRecord.setNumber(lastestNumber);
+					lotteryRecord.setFirstDigit(lastestNumber.charAt(0) - '0');
+					lotteryRecord.setSecondDigit(lastestNumber.charAt(1) - '0');
+					lotteryRecord.setThirdDigit(lastestNumber.charAt(2) - '0');
+					lotteryRecord.setFourthDigit(lastestNumber.charAt(3) - '0');
+					lotteryRecord.setFifthDigit(lastestNumber.charAt(4) - '0');
+					lotteryRecordDao.insertLotteryRecord(lotteryRecord);
+					lotteryNo = lotteryRecord.getLotteryNo();
+				}
+			}
+			return lotteryNo;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return StringUtil.EMPTY;
+	}
+
+
 
 	public List<LotteryMiss> getAllLotteryMiss() {
 		return lotteryRecordDao.getAllLotteryMiss();
