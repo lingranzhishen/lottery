@@ -113,7 +113,7 @@ public class LotteryRecordService {
                 Element tr = trs.get(i);
                 Elements tds = tr.select("td");
                 if (tds.get(0).hasClass("hui")) {
-                    break;
+                    continue;
                 }
                 lastestPhase = tds.get(0).text().substring(2, 11);
                 Elements numbers = tds.get(2).getElementsByClass("hm_bg");
