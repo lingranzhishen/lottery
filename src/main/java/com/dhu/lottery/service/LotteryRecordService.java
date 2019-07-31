@@ -115,8 +115,8 @@ public class LotteryRecordService {
                 if (tds.get(0).hasClass("hui")) {
                     break;
                 }
-                lastestPhase = tds.get(0).text().substring(2, 9);
-                Elements numbers = tds.get(3).select("hm_bg");
+                lastestPhase = tds.get(0).text().substring(2, 11);
+                Elements numbers = tds.get(2).getElementsByClass("hm_bg");
                 for (int j = 0; j < numbers.size(); ++j) {
                     Element td = numbers.get(j);
                     lastestNumber += td.text();
