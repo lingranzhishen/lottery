@@ -52,7 +52,17 @@ public class LotteryMiss {
 	private int status;
 	private String number;
 
+	private int type=1;
+
 	public String toString() {
 		return "开奖序号:" + lotteryNo + "\n开奖号码:" + number + "\n结果:" + msg;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

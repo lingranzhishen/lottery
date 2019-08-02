@@ -38,6 +38,7 @@ public class LotteryMonitor {
 					lm.setLotteryNo(lastestLottery);
 					lm.setStatus(1);
 					lm.setMsg(result);
+					lm.setType(1);
 					lotteryRecordService.insertLotteryMiss(lm);
 				logger.info("发送邮件！！！");
 				System.out.println("发送邮件！！！");
@@ -59,6 +60,7 @@ public class LotteryMonitor {
                     lm.setLotteryNo(lastestLottery);
                     lm.setStatus(1);
                     lm.setMsg(result);
+                    lm.setType(lotteryType.getType());
                     lotteryRecordService.insertLotteryMiss(lm);
                     logger.info("发送邮件！！！");
                     System.out.println("发送邮件！！！");

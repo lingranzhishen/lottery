@@ -7,16 +7,16 @@
 		order by lotteryNo desc
 	</select>
 	<insert id="insertLotteryMiss">
-	insert into t_lottery_miss(lotteryNo,msg,createTime,status)
+	insert into t_lottery_miss(lotteryNo,msg,createTime,status,type)
 	values
-	(#{lotteryNo},#{msg},now(),1)
+	(#{lotteryNo},#{msg},now(),1,#{type})
 	</insert>
 	<update id="updateLotteryMiss">
 	update t_lottery_miss set status=0
 	</update>
 	<select id="getAllLotteryMiss" resultType="lotteryMiss">
 	select m.*,r.number from t_lottery_miss m left join t_lottery_record r
-	on m.lotteryNo=r.lotteryNo
+	on m.lotteryNo=r.lotteryNo and m.type=r.type
 	 where status=1
 	</select>
 	<insert id="insertLotteryRecord">
