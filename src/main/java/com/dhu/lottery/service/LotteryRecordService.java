@@ -74,14 +74,14 @@ public class LotteryRecordService {
                 }
             }
         }
-        StringBuilder result = new StringBuilder(type.getDesc()+":");
+        StringBuilder result = new StringBuilder();
         for (ILotteryRule ilr : ruleList) {
             if (ilr.isMatch(records)) {
                 result.append(ilr.getRuleResult()).append(";");
             }
         }
         if (result.length() > 0) {
-            return result.toString();
+            return type.getDesc()+":"+result.toString();
         }
         return StringUtil.EMPTY;
     }
