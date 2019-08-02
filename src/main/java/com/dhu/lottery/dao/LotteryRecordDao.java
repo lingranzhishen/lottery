@@ -30,4 +30,6 @@ public interface LotteryRecordDao {
 	List<LotteryMiss> getAllLotteryMiss();
 	
 	List<String> getAllOptionValues(String type);
+
+	int existsV2(String lastestPhase,Integer type);
 }

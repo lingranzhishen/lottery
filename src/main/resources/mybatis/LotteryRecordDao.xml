@@ -107,6 +107,10 @@
 	</select>
 
 
+	<select id="existsV2" resultType="integer">
+		select count(1) from t_lottery_record where lotteryNo=#{lotteryNo} and type=#{type}
+	</select>
+
 	<insert id="insertLotteryRecordV2">
 		insert into t_lottery_record_v2
 		<trim prefix="(" suffix=")" suffixOverrides=",">

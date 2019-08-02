@@ -202,7 +202,7 @@ public class LotteryRecordService {
                 }
 
                 LotteryRecord lotteryRecord = new LotteryRecord();
-                if (lotteryRecordDao.exists(lastestPhase) < 1) {
+                if (lotteryRecordDao.existsV2(lastestPhase,lotteryType.getType()) < 1) {
                     lotteryRecord.setCreateTime(new Date());
                     lotteryRecord.setLotteryNo(lastestPhase);
                     lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase.substring(6)));
