@@ -22,7 +22,7 @@ public interface LotteryRecordDao {
 
 	void insertLotteryMiss(LotteryMiss lm);
 
-	void insertLotteryRecordV2(LotteryMiss lm);
+	void insertLotteryRecordV2(LotteryRecord lm);
 
 
 	List<LotteryRecord> getTodayLotteryRecordV2(Integer type);

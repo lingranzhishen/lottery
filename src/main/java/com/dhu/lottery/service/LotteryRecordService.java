@@ -213,7 +213,7 @@ public class LotteryRecordService {
                     lotteryRecord.setFourthDigit(lastestNumber.charAt(3) - '0');
                     lotteryRecord.setFifthDigit(lastestNumber.charAt(4) - '0');
                     lotteryRecord.setType(lotteryType.getType());
-                    lotteryRecordDao.insertLotteryRecord(lotteryRecord);
+                    lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
                     lotteryNo = lotteryRecord.getLotteryNo();
                 }
 
