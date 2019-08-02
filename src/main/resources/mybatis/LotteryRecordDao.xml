@@ -108,7 +108,7 @@
 
 
 	<select id="existsV2" resultType="integer">
-		select count(1) from t_lottery_record where lotteryNo=#{lotteryNo} and type=#{type}
+		select count(1) from t_lottery_record_v2 where lotteryNo=#{lotteryNo} and type=#{type}
 	</select>
 
 	<insert id="insertLotteryRecordV2">
