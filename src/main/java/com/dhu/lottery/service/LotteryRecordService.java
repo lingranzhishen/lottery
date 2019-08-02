@@ -64,7 +64,7 @@ public class LotteryRecordService {
     }
 
     public String getLotteryMissByType(LotteryType type) {
-        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordV2(type.getType());
+        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordByType(type.getType());
         List<LotteryRule> rules = lotteryRecordDao.getAllRule();
         List<ILotteryRule> ruleList = new ArrayList<>();
         if (rules != null) {

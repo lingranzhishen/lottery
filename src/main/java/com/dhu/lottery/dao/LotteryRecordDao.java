@@ -25,7 +25,7 @@ public interface LotteryRecordDao {
 	void insertLotteryRecordV2(LotteryRecord lm);
 
 
-	List<LotteryRecord> getTodayLotteryRecordV2(Integer type);
+	List<LotteryRecord> getTodayLotteryRecordByType(Integer type);
 
 	List<LotteryMiss> getAllLotteryMiss();
 	
