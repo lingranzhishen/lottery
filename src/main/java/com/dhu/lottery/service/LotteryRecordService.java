@@ -220,7 +220,7 @@ public class LotteryRecordService {
             }
             return lotteryNo;
         } catch (Exception e) {
-            logger.error("获取号码失败");
+            logger.error("获取号码失败"+e.getMessage(),e);
         }
         return StringUtil.EMPTY;
     }
