@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import com.dhu.lottery.enums.LotteryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,28 @@ public class LotteryMonitor {
 		}
 		logger.info("彩票监控结束！！！");
 	}
+
+
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void monitorAllTypeLottery() {
+        logger.info("彩票监控开始！！！");
+        for(LotteryType lotteryType:LotteryType.values()) {
+            String lastestLottery = lotteryRecordService.insertLotteryRecordByType(lotteryType);
+            if (StringUtil.isNotEmpty(lastestLottery)) {
+                String result = lotteryRecordService.getLotteryMissByType(lotteryType);
+                if (StringUtil.isNotEmpty(result)) {
+                    LotteryMiss lm = new LotteryMiss();
+                    lm.setLotteryNo(lastestLottery);
+                    lm.setStatus(1);
+                    lm.setMsg(result);
+                    lotteryRecordService.insertLotteryMiss(lm);
+                    logger.info("发送邮件！！！");
+                    System.out.println("发送邮件！！！");
+                }
+            }
+        }
+        logger.info("彩票监控结束！！！");
+    }
 	
 	@Scheduled(cron = "0 2/5 * * * ?")
 	public void sendNotify() {

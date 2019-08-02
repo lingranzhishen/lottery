@@ -82,7 +82,7 @@
 				#{sequenceOfToday,jdbcType=INTEGER},
 			</if>
 			<if test="type != null">
-				#{type,jdbcType=TINYINT},
+				#{type,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -98,4 +98,80 @@
 	<select id="getAllOptionValues" resultType="string">
 		select optionValue from t_sys_parameter where type=#{type}
 	</select>
+
+	<select id="getTodayLotteryRecordByType" resultType="lotteryRecord">
+		select * from t_lottery_record_v2
+		where createTime>date_sub(curdate(),interval 1 day)
+		and type=#{type}
+		order by lotteryNo desc
+	</select>
+
+
+	<insert id="insertLotteryRecordV2">
+		insert into t_lottery_record_v2
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="lotteryNo != null">
+				lotteryNo,
+			</if>
+			<if test="firstDigit != null">
+				firstDigit,
+			</if>
+			<if test="secondDigit != null">
+				secondDigit,
+			</if>
+			<if test="thirdDigit != null">
+				thirdDigit,
+			</if>
+			<if test="fourthDigit != null">
+				fourthDigit,
+			</if>
+			<if test="fifthDigit != null">
+				fifthDigit,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="sequenceOfToday != null">
+				sequenceOfToday,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="lotteryNo != null">
+				#{lotteryNo,jdbcType=VARCHAR},
+			</if>
+			<if test="firstDigit != null">
+				#{firstDigit,jdbcType=INTEGER},
+			</if>
+			<if test="secondDigit != null">
+				#{secondDigit,jdbcType=INTEGER},
+			</if>
+			<if test="thirdDigit != null">
+				#{thirdDigit,jdbcType=INTEGER},
+			</if>
+			<if test="fourthDigit != null">
+				#{fourthDigit,jdbcType=INTEGER},
+			</if>
+			<if test="fifthDigit != null">
+				#{fifthDigit,jdbcType=INTEGER},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sequenceOfToday != null">
+				#{sequenceOfToday,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
 </mapper>

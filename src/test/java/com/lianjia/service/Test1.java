@@ -4,7 +4,6 @@ import javax.mail.MessagingException;
 
 import com.dhu.common.HttpUtil;
 import com.dhu.common.util.StringUtil;
-import com.dhu.lottery.model.LotteryRecord;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +17,6 @@ import com.dhu.lottery.service.LotteryRecordService;
 import base.BaseTest;
 
 import java.io.IOException;
-import java.util.Date;
 
 public class Test1 extends BaseTest {
 	@Autowired

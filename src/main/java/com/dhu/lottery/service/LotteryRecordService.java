@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.dhu.lottery.enums.LotteryType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -32,6 +35,9 @@ public class LotteryRecordService {
     @Autowired
     HttpUtil httpUtil;
 
+    private final static Logger logger = LoggerFactory.getLogger(LotteryRecordService.class);
+
+
     public String getLotteryMiss() {
         List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecord();
         List<LotteryRule> rules = lotteryRecordDao.getAllRule();
@@ -46,6 +52,31 @@ public class LotteryRecordService {
             }
         }
         StringBuilder result = new StringBuilder();
+        for (ILotteryRule ilr : ruleList) {
+            if (ilr.isMatch(records)) {
+                result.append(ilr.getRuleResult()).append(";");
+            }
+        }
+        if (result.length() > 0) {
+            return result.toString();
+        }
+        return StringUtil.EMPTY;
+    }
+
+    public String getLotteryMissByType(LotteryType type) {
+        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordV2(type.getType());
+        List<LotteryRule> rules = lotteryRecordDao.getAllRule();
+        List<ILotteryRule> ruleList = new ArrayList<>();
+        if (rules != null) {
+            for (LotteryRule lr : rules) {
+                ILotteryRule ruleBean = (ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode());
+                if (ruleBean != null) {
+                    ruleBean.setLotteryRule(lr);
+                    ruleList.add(ruleBean);
+                }
+            }
+        }
+        StringBuilder result = new StringBuilder(type.getDesc()+":");
         for (ILotteryRule ilr : ruleList) {
             if (ilr.isMatch(records)) {
                 result.append(ilr.getRuleResult()).append(";");
@@ -145,21 +176,33 @@ public class LotteryRecordService {
         return StringUtil.EMPTY;
     }
 
-
-    public String insertLotteryRecordV2() {
+    public String insertLotteryRecordByType(LotteryType lotteryType) {
         try {
-
             String result = httpUtil
-                    .doGet("https://www.k8kjw9.com/api/recent?code=cq_ssc");
-            JSONObject jo = JSONObject.parseObject(result);
-            JSONArray awards = jo.getJSONArray("data");
+                    .doGet(lotteryType.getUrl());
+            Document doc = Jsoup.parse(result);
             String lotteryNo = StringUtil.EMPTY;
-            for (int i = 0; i < awards.size(); i++) {
-                JSONObject award = awards.getJSONObject(i);
+            Elements kjjg_table = doc.getElementsByClass("kjjg_table");
+            Element table = kjjg_table.first();
+            Elements trs = table.select("tr");
+
+            for (int i = 0; i < trs.size(); i++) {
+                String lastestPhase = "";
+                String lastestNumber = "";
+                Element tr = trs.get(i);
+                Elements tds = tr.select("td");
+                if (tds.get(0).hasClass("hui")) {
+                    continue;
+                }
+                lastestPhase = tds.get(0).text().substring(2, 11);
+                Elements numbers = tds.get(2).getElementsByClass("hm_bg");
+                for (int j = 0; j < numbers.size(); ++j) {
+                    Element td = numbers.get(j);
+                    lastestNumber += td.text();
+                }
+
                 LotteryRecord lotteryRecord = new LotteryRecord();
-                String lastestPhase = award.getString("issue").substring(2);
                 if (lotteryRecordDao.exists(lastestPhase) < 1) {
-                    String lastestNumber = award.getString("code").replaceAll(",", StringUtil.EMPTY);
                     lotteryRecord.setCreateTime(new Date());
                     lotteryRecord.setLotteryNo(lastestPhase);
                     lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase.substring(6)));
@@ -169,16 +212,19 @@ public class LotteryRecordService {
                     lotteryRecord.setThirdDigit(lastestNumber.charAt(2) - '0');
                     lotteryRecord.setFourthDigit(lastestNumber.charAt(3) - '0');
                     lotteryRecord.setFifthDigit(lastestNumber.charAt(4) - '0');
+                    lotteryRecord.setType(lotteryType.getType());
                     lotteryRecordDao.insertLotteryRecord(lotteryRecord);
                     lotteryNo = lotteryRecord.getLotteryNo();
                 }
+
             }
             return lotteryNo;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("获取号码失败");
         }
         return StringUtil.EMPTY;
     }
+
 
 
     public List<LotteryMiss> getAllLotteryMiss() {
