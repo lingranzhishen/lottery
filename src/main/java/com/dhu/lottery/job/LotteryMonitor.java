@@ -49,7 +49,7 @@ public class LotteryMonitor {
 
     @Scheduled(cron = "0 0/1 * * * ?")
     public void monitorAllTypeLottery() {
-        logger.info("彩票监控开始！！！");
+        logger.info("monitorAllTypeLottery彩票监控开始！！！");
         for(LotteryType lotteryType:LotteryType.values()) {
             String lastestLottery = lotteryRecordService.insertLotteryRecordByType(lotteryType);
             if (StringUtil.isNotEmpty(lastestLottery)) {
@@ -65,7 +65,7 @@ public class LotteryMonitor {
                 }
             }
         }
-        logger.info("彩票监控结束！！！");
+        logger.info("monitorAllTypeLottery彩票监控结束！！！");
     }
 	
 	@Scheduled(cron = "0 2/5 * * * ?")
