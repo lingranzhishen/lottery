@@ -33,7 +33,7 @@ public class LotteryMonitor {
 		String lastestLottery = lotteryRecordService.insertLotteryRecordV3();
 		if (StringUtil.isNotEmpty(lastestLottery)) {
 			String result = lotteryRecordService.getLotteryMiss();
-			if (StringUtil.isNotEmpty(result)) {
+			/*if (StringUtil.isNotEmpty(result)) {
 					LotteryMiss lm = new LotteryMiss();
 					lm.setLotteryNo(lastestLottery);
 					lm.setStatus(1);
@@ -42,7 +42,7 @@ public class LotteryMonitor {
 					lotteryRecordService.insertLotteryMiss(lm);
 				logger.info("发送邮件！！！");
 				System.out.println("发送邮件！！！");
-			}
+			}*/
 		}
 		logger.info("彩票监控结束！！！");
 	}
