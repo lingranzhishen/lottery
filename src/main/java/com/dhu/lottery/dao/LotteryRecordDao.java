@@ -16,7 +16,7 @@ public interface LotteryRecordDao {
 
 	List<LotteryRule> getAllRule();
 
-	int exists(String lastestPhase);
+	int exists(String lotteryNo);
 
 	int updateLotteryMiss();
 
@@ -31,5 +31,5 @@ public interface LotteryRecordDao {
 	
 	List<String> getAllOptionValues(String type);
 
-	int existsV2(String lastestPhase,Integer type);
+	int existsV2(String lotteryNo,Integer type);
 }
