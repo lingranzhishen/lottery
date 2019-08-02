@@ -1,8 +1,6 @@
 package com.dhu.lottery.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.dhu.lottery.enums.LotteryType;
 import org.jsoup.Jsoup;
@@ -202,7 +200,10 @@ public class LotteryRecordService {
                 }
 
                 LotteryRecord lotteryRecord = new LotteryRecord();
-                if (lotteryRecordDao.existsV2(lastestPhase,lotteryType.getType()) < 1) {
+                Map param=new HashMap();
+                param.put("lotteryNo",lastestPhase);
+                param.put("type",lotteryType.getType());
+                if (lotteryRecordDao.existsV2(param) < 1) {
                     lotteryRecord.setCreateTime(new Date());
                     lotteryRecord.setLotteryNo(lastestPhase);
                     lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase.substring(6)));

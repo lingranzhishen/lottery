@@ -1,6 +1,7 @@
 package com.dhu.lottery.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +32,5 @@ public interface LotteryRecordDao {
 	
 	List<String> getAllOptionValues(String type);
 
-	int existsV2(String lotteryNo,Integer type);
+	int existsV2(Map param);
 }
