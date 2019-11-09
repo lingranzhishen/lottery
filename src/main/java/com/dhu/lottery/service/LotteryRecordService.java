@@ -184,6 +184,9 @@ public class LotteryRecordService {
     }
 
     public String insertLotteryRecordByType(LotteryType lotteryType) {
+        if(lotteryType.equals(LotteryType.HLJ_SSC)){
+            return insertHeilongjiangLotteryRecordByType(lotteryType);
+        }
         try {
             String result = httpUtil
                     .doGet(lotteryType.getUrl());
@@ -215,7 +218,61 @@ public class LotteryRecordService {
                 if (lotteryRecordDao.existsV2(param) < 1) {
                     lotteryRecord.setCreateTime(new Date());
                     lotteryRecord.setLotteryNo(lastestPhase);
+
                     lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase.substring(6)));
+                    lotteryRecord.setNumber(lastestNumber);
+                    lotteryRecord.setFirstDigit(lastestNumber.charAt(0) - '0');
+                    lotteryRecord.setSecondDigit(lastestNumber.charAt(1) - '0');
+                    lotteryRecord.setThirdDigit(lastestNumber.charAt(2) - '0');
+                    lotteryRecord.setFourthDigit(lastestNumber.charAt(3) - '0');
+                    lotteryRecord.setFifthDigit(lastestNumber.charAt(4) - '0');
+                    lotteryRecord.setType(lotteryType.getType());
+                    lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
+                    lotteryNo = lotteryRecord.getLotteryNo();
+                }
+
+            }
+            return lotteryNo;
+        } catch (Exception e) {
+            logger.error("获取号码失败"+e.getMessage(),e);
+        }
+        return StringUtil.EMPTY;
+    }
+
+    public String insertHeilongjiangLotteryRecordByType(LotteryType lotteryType) {
+        try {
+            String result = httpUtil
+                    .doGet(lotteryType.getUrl());
+            Document doc = Jsoup.parse(result);
+            String lotteryNo = StringUtil.EMPTY;
+            Elements kjjg_table = doc.getElementsByClass("kjjg_table");
+            Element table = kjjg_table.first();
+            Elements trs = table.select("tr");
+
+            for (int i = 0; i < trs.size(); i++) {
+                String lastestPhase = "";
+                String lastestNumber = "";
+                Element tr = trs.get(i);
+                Elements tds = tr.select("td");
+                if (tds.get(0).hasClass("hui")) {
+                    continue;
+                }
+                lastestPhase = tds.get(0).text().substring(0, 6);
+                Elements numbers = tds.get(2).getElementsByClass("hm_bg");
+                for (int j = 0; j < numbers.size(); ++j) {
+                    Element td = numbers.get(j);
+                    lastestNumber += td.text();
+                }
+
+                LotteryRecord lotteryRecord = new LotteryRecord();
+                Map param=new HashMap();
+                param.put("lotteryNo",lastestPhase);
+                param.put("type",lotteryType.getType());
+                if (lotteryRecordDao.existsV2(param) < 1) {
+                    lotteryRecord.setCreateTime(new Date());
+                    lotteryRecord.setLotteryNo(lastestPhase);
+
+                    lotteryRecord.setSequenceOfToday(Integer.parseInt(lastestPhase));
                     lotteryRecord.setNumber(lastestNumber);
                     lotteryRecord.setFirstDigit(lastestNumber.charAt(0) - '0');
                     lotteryRecord.setSecondDigit(lastestNumber.charAt(1) - '0');
