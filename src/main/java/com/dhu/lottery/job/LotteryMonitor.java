@@ -55,6 +55,7 @@ public class LotteryMonitor {
             String lastestLottery = lotteryRecordService.insertLotteryRecordByType(lotteryType);
             if (StringUtil.isNotEmpty(lastestLottery)) {
                 String result = lotteryRecordService.getLotteryMissByType(lotteryType);
+				lastestLottery=lotteryRecordService.getNewestLotteryRecord(lotteryType);
                 if (StringUtil.isNotEmpty(result)) {
                     LotteryMiss lm = new LotteryMiss();
                     lm.setLotteryNo(lastestLottery);

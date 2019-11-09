@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSONArray;
@@ -84,6 +85,14 @@ public class LotteryRecordService {
             return type.getDesc()+":"+result.toString();
         }
         return StringUtil.EMPTY;
+    }
+
+    public String getNewestLotteryRecord(LotteryType type) {
+        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordByType(type.getType());
+        if(CollectionUtils.isEmpty(records)){
+            return StringUtil.EMPTY;
+        }
+        return records.get(0).getLotteryNo();
     }
 
     public List<LotteryRecord> getTodayLotteryRecord() {
