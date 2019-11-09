@@ -10,6 +10,9 @@ public enum LotteryType {
 	CQ_SSC(1,"https://shishicai.cjcp.com.cn/chongqing/kaijiang/","重庆时时彩"),
     XJ_SSC(2,"https://shishicai.cjcp.com.cn/xinjiang/kaijiang/","新疆时时彩"),
     TJ_SSC(3,"https://shishicai.cjcp.com.cn/tianjin/kaijiang/","天津时时彩"),
+    HLJ_SSC(4,"https://shishicai.cjcp.com.cn/heilongjiang/kaijiang/","黑龙江时时彩"),
+    YN_SSC(5,"https://shishicai.cjcp.com.cn/yunnan/kaijiang/","云南时时彩"),
+
     ;
 
     LotteryType(int type, String url, String desc) {
