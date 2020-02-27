@@ -18,7 +18,7 @@ public class StockMonitor {
 	@Autowired
 	MailUtil mailUtil;
 
-	@Scheduled(cron = "0 0 1 * * ? *")
+	@Scheduled(cron = "0 0 1 * * ?")
 	public void monitorStock() {
 		logger.info("股票监控开始！！！");
 		stockRecordService.insertStockInfo();
