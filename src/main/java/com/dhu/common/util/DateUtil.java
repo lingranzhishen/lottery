@@ -491,6 +491,10 @@ public class DateUtil {
 		return getDateTime(DEFAULT_DATE_FORMAT);
 	}
 
+
+	public static Date getTodayDate() {
+		return parse(getDateTime(DEFAULT_DATE_FORMAT),DEFAULT_DATE_FORMAT);
+	}
 	/**
 	 * 获取当天起始时间字符串 yyyy-MM-dd
 	 * 

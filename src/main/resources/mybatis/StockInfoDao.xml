@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dhu.lottery.dao.StockInfoDao">
+
+	<insert id="insertStockInfo">
+		INSERT INTO `t_stock_info` (`symbol`, `name`, `trade`, `pricechange`, `changepercent`, `buy`, `sell`, `settlement`, `open`, `volume`, `amount`, `code`, `ticktime`, `push_date`) VALUES
+		(#{symbol}, #{name}, #{trade}, #{pricechange}, #{changepercent}, #{buy}, #{sell}, #{settlement}, #{open}, #{volume}, #{amount}, #{code}, #{ticktime},now());
+	</insert>
+
+
+	<select id="queryRecord" resultType="stockInfo">
+		select * from t_stock_info
+		where symbol=#{symbol} and push_date=#{pushDate}
+	</select>
+
+
+</mapper>
