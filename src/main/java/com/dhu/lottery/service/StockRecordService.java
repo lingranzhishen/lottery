@@ -11,11 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -44,8 +46,8 @@ public class StockRecordService {
                         Map<String,Object>maps=new HashMap<>();
                         maps.put("symbol",s.getSymbol());
                         maps.put("pushDate",DateUtil.getTodayDate());
-                        StockInfo stockInfo= lotteryRecordDao.queryRecord(maps);
-                        if(stockInfo==null){
+                        List<StockInfo> stockInfo= lotteryRecordDao.queryRecord(maps);
+                        if(CollectionUtils.isEmpty(stockInfo)){
                             lotteryRecordDao.insertStockInfo(s);
                         }
                     }

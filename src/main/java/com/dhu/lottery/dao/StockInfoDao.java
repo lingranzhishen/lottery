@@ -4,6 +4,7 @@ import com.dhu.lottery.model.StockInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -12,5 +13,5 @@ public interface StockInfoDao {
 
 	void insertStockInfo(StockInfo record);
 
-	StockInfo queryRecord(Map param);
+	List<StockInfo> queryRecord(Map param);
 }
