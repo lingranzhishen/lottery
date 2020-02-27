@@ -45,7 +45,7 @@ public class StockRecordService {
                         maps.put("symbol",s.getSymbol());
                         maps.put("pushDate",DateUtil.getTodayDate());
                         StockInfo stockInfo= lotteryRecordDao.queryRecord(maps);
-                        if(stockInfo!=null){
+                        if(stockInfo==null){
                             lotteryRecordDao.insertStockInfo(s);
                         }
                     }
