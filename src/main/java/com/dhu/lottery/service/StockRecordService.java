@@ -41,7 +41,10 @@ public class StockRecordService {
                 for(int j=1; j<totalPage;j++){
                     ResultDTO tempResult = getByCityAndPage(cityList[i],j);
                     for(StockInfo s: tempResult.getResult().getData()){
-                        StockInfo stockInfo= lotteryRecordDao.queryRecord(s.getSymbol(),DateUtil.getTodayDate());
+                        Map<String,Object>maps=new HashMap<>();
+                        maps.put("symbol",s.getSymbol());
+                        maps.put("pushDate",DateUtil.getTodayDate());
+                        StockInfo stockInfo= lotteryRecordDao.queryRecord(maps);
                         if(stockInfo!=null){
                             lotteryRecordDao.insertStockInfo(s);
                         }
