@@ -66,6 +66,7 @@ public class StockRecordService {
         param.put("type","4");
         param.put("page",String.valueOf(page));
         String result = httpUtil.doGet(url,param);
+        logger.info(result);
         return JSONObject.parseObject(result,ResultDTO.class);
     }
 
