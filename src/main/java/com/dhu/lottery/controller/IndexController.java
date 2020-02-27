@@ -3,6 +3,7 @@ package com.dhu.lottery.controller;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dhu.lottery.service.StockRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,8 @@ public class IndexController extends BaseController {
 	MailUtil mailUtil;
 	@Autowired
 	LotteryRecordService lotteryRecordService;
-
+	@Autowired
+	StockRecordService stockRecordService;
 	@RequestMapping(value = "")
 	public String index(HttpServletResponse response) {
 		return "index";
@@ -55,6 +57,14 @@ public class IndexController extends BaseController {
 	public JsonResult lastLottery() {
 		JsonResult result=ok();
 		result.put("record", lotteryRecordService.getTodayLotteryRecord());
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/testStock.json")
+	public JsonResult testStock() {
+		JsonResult result=ok();
+		stockRecordService.insertStockInfo();
 		return result;
 	}
 }
