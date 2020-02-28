@@ -86,6 +86,7 @@ public class StockRecordService {
                 if (tds.get(0).text().contains("总")) {
                     String REGEX = "[^(0-9).]";
                     String  lastestPhase = tds.get(1).text();
+                    logger.info(tds.get(1).text());
                    String num= Pattern.compile(REGEX).matcher(lastestPhase).replaceAll("").trim();
                     return new BigDecimal(num).multiply(new BigDecimal(100000000)).longValue();
                 }
