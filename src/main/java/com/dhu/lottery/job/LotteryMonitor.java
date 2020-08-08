@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 
+import com.dhu.lottery.enums.GDLotteryType;
 import com.dhu.lottery.enums.LotteryType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +71,27 @@ public class LotteryMonitor {
         }
         logger.info("monitorAllTypeLottery彩票监控结束！！！");
     }
+
+
+
+	@Scheduled(cron = "0 0/2 * * * ?")
+	public void monitorGDAllTypeLottery() {
+		logger.info("monitorAllTypeLottery高德彩票监控开始！！！");
+		for(GDLotteryType lotteryType:GDLotteryType.values()) {
+				String result = lotteryRecordService.getLotteryMissByType(lotteryType);
+				String lastestLottery=lotteryRecordService.getNewestLotteryRecord(lotteryType);
+				if (StringUtil.isNotEmpty(result)) {
+					LotteryMiss lm = new LotteryMiss();
+					lm.setLotteryNo(lastestLottery);
+					lm.setStatus(1);
+					lm.setMsg(result);
+					lm.setType(lotteryType.getType());
+					lotteryRecordService.insertLotteryMiss(lm);
+					logger.info("发送邮件！！！");
+					System.out.println("发送邮件！！！");
+				}
+		}
+	}
 	
 	@Scheduled(cron = "0 2/5 * * * ?")
 	public void sendNotify() {

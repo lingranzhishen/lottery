@@ -60,6 +60,15 @@ public class IndexController extends BaseController {
 		return result;
 	}
 
+
+	@ResponseBody
+	@RequestMapping(value = "/insertLottery.json")
+	public JsonResult insertLottery(String lotteryNo,String digits,int type) {
+		JsonResult result=ok();
+		lotteryRecordService.insertGDLotteryRecord(lotteryNo,digits,type);
+		return result;
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/testStock.json")
 	public JsonResult testStock() {

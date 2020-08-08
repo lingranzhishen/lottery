@@ -2,6 +2,7 @@ package com.dhu.lottery.service;
 
 import java.util.*;
 
+import com.dhu.lottery.enums.GDLotteryType;
 import com.dhu.lottery.enums.LotteryType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -88,6 +89,40 @@ public class LotteryRecordService {
     }
 
     public String getNewestLotteryRecord(LotteryType type) {
+        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordByType(type.getType());
+        if(CollectionUtils.isEmpty(records)){
+            return StringUtil.EMPTY;
+        }
+        return records.get(0).getLotteryNo();
+    }
+
+
+    public String getLotteryMissByType(GDLotteryType type) {
+        List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordByType(type.getType());
+        List<LotteryRule> rules = lotteryRecordDao.getAllRule();
+        List<ILotteryRule> ruleList = new ArrayList<>();
+        if (rules != null) {
+            for (LotteryRule lr : rules) {
+                ILotteryRule ruleBean = (ILotteryRule) SpringContextUtil.getBean(lr.getRuleCode());
+                if (ruleBean != null) {
+                    ruleBean.setLotteryRule(lr);
+                    ruleList.add(ruleBean);
+                }
+            }
+        }
+        StringBuilder result = new StringBuilder();
+        for (ILotteryRule ilr : ruleList) {
+            if (ilr.isMatch(records)) {
+                result.append(ilr.getRuleResult()).append(";");
+            }
+        }
+        if (result.length() > 0) {
+            return type.getDesc()+":"+result.toString();
+        }
+        return StringUtil.EMPTY;
+    }
+
+    public String getNewestLotteryRecord(GDLotteryType type) {
         List<LotteryRecord> records = lotteryRecordDao.getTodayLotteryRecordByType(type.getType());
         if(CollectionUtils.isEmpty(records)){
             return StringUtil.EMPTY;
@@ -301,6 +336,33 @@ public class LotteryRecordService {
     public void insertLotteryMiss(LotteryMiss lm) {
         lotteryRecordDao.insertLotteryMiss(lm);
     }
+
+    public void insertGDLotteryRecord(String lotteryNo, String digits,int lotteryType) {
+
+        GDLotteryType gdLotteryType=  GDLotteryType.getGdTypeByValue(lotteryType);
+        if(GDLotteryType.DEFAULT.equals(gdLotteryType)){
+            return;
+        }
+        LotteryRecord lotteryRecord = new LotteryRecord();
+        Map param=new HashMap();
+        param.put("lotteryNo",lotteryNo);
+        param.put("type",lotteryType);
+        if (lotteryRecordDao.existsV2(param) < 1) {
+            lotteryRecord.setCreateTime(new Date());
+            lotteryRecord.setLotteryNo(lotteryNo);
+
+            lotteryRecord.setSequenceOfToday(Integer.parseInt(lotteryNo));
+            lotteryRecord.setNumber(digits);
+            lotteryRecord.setFirstDigit(digits.charAt(0) - '0');
+            lotteryRecord.setSecondDigit(digits.charAt(1) - '0');
+            lotteryRecord.setThirdDigit(digits.charAt(2) - '0');
+            lotteryRecord.setFourthDigit(digits.charAt(3) - '0');
+            lotteryRecord.setFifthDigit(digits.charAt(4) - '0');
+            lotteryRecord.setType(lotteryType);
+            lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
+        }
+    }
+
 
     public int updateLotteryMiss() {
         return lotteryRecordDao.updateLotteryMiss();
