@@ -1,5 +1,6 @@
 package com.dhu.lottery.service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.dhu.lottery.enums.GDLotteryType;
@@ -351,7 +352,7 @@ public class LotteryRecordService {
             lotteryRecord.setCreateTime(new Date());
             lotteryRecord.setLotteryNo(lotteryNo);
 
-            lotteryRecord.setSequenceOfToday(Integer.parseInt(lotteryNo));
+            lotteryRecord.setSequenceOfToday(new BigDecimal(lotteryNo).intValue());
             lotteryRecord.setNumber(digits);
             lotteryRecord.setFirstDigit(digits.charAt(0) - '0');
             lotteryRecord.setSecondDigit(digits.charAt(1) - '0');
