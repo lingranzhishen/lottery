@@ -74,7 +74,7 @@ public class LotteryMonitor {
 
 
 
-	@Scheduled(cron = "0 0/2 * * * ?")
+	
 	public void monitorGDAllTypeLottery() {
 		logger.info("monitorAllTypeLottery高德彩票监控开始！！！");
 		for(GDLotteryType lotteryType:GDLotteryType.values()) {

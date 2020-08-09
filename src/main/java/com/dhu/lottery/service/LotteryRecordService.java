@@ -361,6 +361,19 @@ public class LotteryRecordService {
             lotteryRecord.setFifthDigit(digits.charAt(4) - '0');
             lotteryRecord.setType(lotteryType);
             lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
+
+            String result = getLotteryMissByType(gdLotteryType);
+            String lastestLottery=getNewestLotteryRecord(gdLotteryType);
+            if (StringUtil.isNotEmpty(result)) {
+                LotteryMiss lm = new LotteryMiss();
+                lm.setLotteryNo(lastestLottery);
+                lm.setStatus(1);
+                lm.setMsg(result);
+                lm.setType(gdLotteryType.getType());
+                insertLotteryMiss(lm);
+                logger.info("发送邮件！！！");
+                System.out.println("发送邮件！！！");
+            }
         }
     }
 
