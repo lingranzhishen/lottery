@@ -3,6 +3,7 @@ package com.dhu.lottery.service;
 import java.math.BigDecimal;
 import java.util.*;
 
+import com.alibaba.fastjson.JSON;
 import com.dhu.lottery.enums.GDLotteryType;
 import com.dhu.lottery.enums.LotteryType;
 import org.jsoup.Jsoup;
@@ -361,6 +362,7 @@ public class LotteryRecordService {
             lotteryRecord.setFifthDigit(digits.charAt(4) - '0');
             lotteryRecord.setType(lotteryType);
             lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
+            logger.info(JSON.toJSONString(lotteryRecord));
 
             String result = getLotteryMissByType(gdLotteryType);
             String lastestLottery=getNewestLotteryRecord(gdLotteryType);
