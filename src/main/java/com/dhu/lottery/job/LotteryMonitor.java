@@ -74,7 +74,7 @@ public class LotteryMonitor {
 
 
 
-	
+
 	public void monitorGDAllTypeLottery() {
 		logger.info("monitorAllTypeLottery高德彩票监控开始！！！");
 		for(GDLotteryType lotteryType:GDLotteryType.values()) {
@@ -101,8 +101,8 @@ public class LotteryMonitor {
 			for(LotteryMiss lm:lmList){
 				try {
 					mailUtil.sendTextMail(lm.toString());
-				} catch (MessagingException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					logger.warn("彩票信息监控发送结束！！！",e);
 				}
 			}
 			lotteryRecordService.updateLotteryMiss();
