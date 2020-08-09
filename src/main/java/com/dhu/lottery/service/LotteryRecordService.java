@@ -353,7 +353,7 @@ public class LotteryRecordService {
             lotteryRecord.setCreateTime(new Date());
             lotteryRecord.setLotteryNo(lotteryNo);
 
-            lotteryRecord.setSequenceOfToday((int)new BigDecimal(lotteryNo).longValue()%1000);
+            lotteryRecord.setSequenceOfToday((int)(new BigDecimal(lotteryNo).longValue()%1000));
             lotteryRecord.setNumber(digits);
             lotteryRecord.setFirstDigit(digits.charAt(0) - '0');
             lotteryRecord.setSecondDigit(digits.charAt(1) - '0');
