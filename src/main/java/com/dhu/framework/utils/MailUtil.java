@@ -28,6 +28,8 @@ public class MailUtil {
 	LotteryRecordDao lotteryRecordDao;
 
 	public void sendTextMail(String msg) throws MessagingException {
+		String password=lotteryRecordDao.getAllOptionValues("password").get(0);
+		mailSender.setPassword(password);
 		MimeMessage mailMessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mailMessage, true, "utf-8");
 		// 设置收件人,群发邮件
