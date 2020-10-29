@@ -747,9 +747,7 @@ public class LotteryRecordService {
     }
 
     public String insertLotteryRecordByType(LotteryType lotteryType) {
-        if(lotteryType.equals(LotteryType.HLJ_SSC)){
-            return insertHeilongjiangLotteryRecordByType(lotteryType);
-        }
+        
         try {
             String result = httpUtil
                     .doGet(lotteryType.getUrl());
