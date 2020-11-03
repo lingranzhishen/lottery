@@ -748,6 +748,7 @@ public class LotteryRecordService {
                     lotteryRecord.setType(lotteryType.getType());
                     lotteryRecordDao.insertLotteryRecordV2(lotteryRecord);
                     lotteryNo = lotteryRecord.getLotteryNo();
+                    logger.info(JSON.toJSONString(lotteryRecord));
                 }
 
             }
