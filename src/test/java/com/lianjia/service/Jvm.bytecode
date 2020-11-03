@@ -1,0 +1,82 @@
+Compiled from "Jvm.java"
+public class com.lianjia.service.Jvm {
+  public com.lianjia.service.Jvm();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aconst_null
+       6: putfield      #2                  // Field a:Ljava/lang/String;
+       9: aload_0
+      10: iconst_0
+      11: putfield      #3                  // Field i:I
+      14: return
+
+  public void getA();
+    Code:
+       0: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: aload_0
+       4: dup
+       5: getfield      #3                  // Field i:I
+       8: dup_x1
+       9: iconst_1
+      10: iadd
+      11: putfield      #3                  // Field i:I
+      14: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+      17: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: bipush        100
+       2: anewarray     #6                  // class java/lang/Thread
+       5: astore_1
+       6: new           #7                  // class com/lianjia/service/Jvm
+       9: dup
+      10: invokespecial #8                  // Method "<init>":()V
+      13: astore_2
+      14: new           #9                  // class java/util/concurrent/CountDownLatch
+      17: dup
+      18: bipush        100
+      20: invokespecial #10                 // Method java/util/concurrent/CountDownLatch."<init>":(I)V
+      23: astore_3
+      24: aload_1
+      25: astore        4
+      27: aload         4
+      29: arraylength
+      30: istore        5
+      32: iconst_0
+      33: istore        6
+      35: iload         6
+      37: iload         5
+      39: if_icmpge     82
+      42: aload         4
+      44: iload         6
+      46: aaload
+      47: astore        7
+      49: new           #11                 // class com/lianjia/service/Jvm$run
+      52: dup
+      53: aload_2
+      54: aload_3
+      55: invokespecial #12                 // Method com/lianjia/service/Jvm$run."<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+      58: astore        8
+      60: new           #6                  // class java/lang/Thread
+      63: dup
+      64: aload         8
+      66: invokespecial #13                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+      69: astore        7
+      71: aload         7
+      73: invokevirtual #14                 // Method java/lang/Thread.start:()V
+      76: iinc          6, 1
+      79: goto          35
+      82: aload_3
+      83: invokevirtual #15                 // Method java/util/concurrent/CountDownLatch.await:()V
+      86: goto          91
+      89: astore        4
+      91: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      94: ldc           #17                 // String done
+      96: invokevirtual #18                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      99: return
+    Exception table:
+       from    to  target type
+          82    86    89   Class java/lang/Exception
+}

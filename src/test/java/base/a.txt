@@ -1,0 +1,105 @@
+Classfile /C:/Users/admin/IdeaProjects/lottery/src/test/java/base/Main.class
+  Last modified 2018-9-30; size 560 bytes
+  MD5 checksum 9270289ae6f5cae0bd75580dbb4f17fc
+  Compiled from "Main.java"
+public class base.Main
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #6.#19         // java/lang/Object."<init>":()V
+   #2 = Fieldref           #20.#21        // java/lang/System.out:Ljava/io/PrintStream;
+   #3 = Methodref          #5.#22         // base/Main.finallyTest:()I
+   #4 = Methodref          #23.#24        // java/io/PrintStream.println:(I)V
+   #5 = Class              #25            // base/Main
+   #6 = Class              #26            // java/lang/Object
+   #7 = Utf8               <init>
+   #8 = Utf8               ()V
+   #9 = Utf8               Code
+  #10 = Utf8               LineNumberTable
+  #11 = Utf8               finallyTest
+  #12 = Utf8               ()I
+  #13 = Utf8               StackMapTable
+  #14 = Class              #27            // java/lang/Throwable
+  #15 = Utf8               main
+  #16 = Utf8               ([Ljava/lang/String;)V
+  #17 = Utf8               SourceFile
+  #18 = Utf8               Main.java
+  #19 = NameAndType        #7:#8          // "<init>":()V
+  #20 = Class              #28            // java/lang/System
+  #21 = NameAndType        #29:#30        // out:Ljava/io/PrintStream;
+  #22 = NameAndType        #11:#12        // finallyTest:()I
+  #23 = Class              #31            // java/io/PrintStream
+  #24 = NameAndType        #32:#33        // println:(I)V
+  #25 = Utf8               base/Main
+  #26 = Utf8               java/lang/Object
+  #27 = Utf8               java/lang/Throwable
+  #28 = Utf8               java/lang/System
+  #29 = Utf8               out
+  #30 = Utf8               Ljava/io/PrintStream;
+  #31 = Utf8               java/io/PrintStream
+  #32 = Utf8               println
+  #33 = Utf8               (I)V
+{
+  public base.Main();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 3: 0
+
+  public static int finallyTest();
+    descriptor: ()I
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=3, args_size=0
+         0: iconst_0
+         1: istore_0
+         2: iconst_1
+         3: istore_0
+         4: iload_0
+         5: istore_1
+         6: iconst_3
+         7: istore_0
+         8: iload_0
+         9: ireturn
+        10: astore_2
+        11: iconst_3
+        12: istore_0
+        13: iload_0
+        14: ireturn
+      Exception table:
+         from    to  target type
+             2     6    10   any
+      LineNumberTable:
+        line 6: 0
+        line 8: 2
+        line 9: 4
+        line 11: 6
+        line 12: 8
+        line 11: 10
+        line 12: 13
+      StackMapTable: number_of_entries = 1
+        frame_type = 255 /* full_frame */
+          offset_delta = 10
+          locals = [ int ]
+          stack = [ class java/lang/Throwable ]
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: invokestatic  #3                  // Method finallyTest:()I
+         6: invokevirtual #4                  // Method java/io/PrintStream.println:(I)V
+         9: return
+      LineNumberTable:
+        line 17: 0
+        line 18: 9
+}
+SourceFile: "Main.java"

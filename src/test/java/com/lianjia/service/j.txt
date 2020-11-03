@@ -1,0 +1,420 @@
+Classfile /C:/Users/admin/IdeaProjects/lottery/src/test/java/com/lianjia/service/Jvm.class
+  Last modified 2018-9-9; size 1181 bytes
+  MD5 checksum c2eaaf44bf50bb3906c8468387ed2122
+  Compiled from "Jvm.java"
+public class com.lianjia.service.Jvm
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #18.#41        // java/lang/Object."<init>":()V
+   #2 = Fieldref           #7.#42         // com/lianjia/service/Jvm.a:Ljava/lang/String;
+   #3 = Fieldref           #7.#43         // com/lianjia/service/Jvm.i:I
+   #4 = Fieldref           #44.#45        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = Methodref          #46.#47        // java/io/PrintStream.println:(I)V
+   #6 = Class              #48            // java/lang/Thread
+   #7 = Class              #49            // com/lianjia/service/Jvm
+   #8 = Methodref          #7.#41         // com/lianjia/service/Jvm."<init>":()V
+   #9 = Class              #50            // java/util/concurrent/CountDownLatch
+  #10 = Methodref          #9.#51         // java/util/concurrent/CountDownLatch."<init>":(I)V
+  #11 = Class              #52            // com/lianjia/service/Jvm$run
+  #12 = Methodref          #11.#53        // com/lianjia/service/Jvm$run."<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #13 = Methodref          #6.#54         // java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+  #14 = Methodref          #6.#55         // java/lang/Thread.start:()V
+  #15 = Methodref          #9.#56         // java/util/concurrent/CountDownLatch.await:()V
+  #16 = String             #57            // done
+  #17 = Methodref          #46.#58        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #18 = Class              #59            // java/lang/Object
+  #19 = Utf8               run
+  #20 = Utf8               InnerClasses
+  #21 = Utf8               a
+  #22 = Utf8               Ljava/lang/String;
+  #23 = Utf8               i
+  #24 = Utf8               I
+  #25 = Utf8               <init>
+  #26 = Utf8               ()V
+  #27 = Utf8               Code
+  #28 = Utf8               LineNumberTable
+  #29 = Utf8               getA
+  #30 = Utf8               main
+  #31 = Utf8               ([Ljava/lang/String;)V
+  #32 = Utf8               StackMapTable
+  #33 = Class              #60            // "[Ljava/lang/String;"
+  #34 = Class              #61            // "[Ljava/lang/Thread;"
+  #35 = Class              #49            // com/lianjia/service/Jvm
+  #36 = Class              #50            // java/util/concurrent/CountDownLatch
+  #37 = Utf8               Exceptions
+  #38 = Class              #62            // java/lang/InterruptedException
+  #39 = Utf8               SourceFile
+  #40 = Utf8               Jvm.java
+  #41 = NameAndType        #25:#26        // "<init>":()V
+  #42 = NameAndType        #21:#22        // a:Ljava/lang/String;
+  #43 = NameAndType        #23:#24        // i:I
+  #44 = Class              #63            // java/lang/System
+  #45 = NameAndType        #64:#65        // out:Ljava/io/PrintStream;
+  #46 = Class              #66            // java/io/PrintStream
+  #47 = NameAndType        #67:#68        // println:(I)V
+  #48 = Utf8               java/lang/Thread
+  #49 = Utf8               com/lianjia/service/Jvm
+  #50 = Utf8               java/util/concurrent/CountDownLatch
+  #51 = NameAndType        #25:#68        // "<init>":(I)V
+  #52 = Utf8               com/lianjia/service/Jvm$run
+  #53 = NameAndType        #25:#69        // "<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #54 = NameAndType        #25:#70        // "<init>":(Ljava/lang/Runnable;)V
+  #55 = NameAndType        #71:#26        // start:()V
+  #56 = NameAndType        #72:#26        // await:()V
+  #57 = Utf8               done
+  #58 = NameAndType        #67:#73        // println:(Ljava/lang/String;)V
+  #59 = Utf8               java/lang/Object
+  #60 = Utf8               [Ljava/lang/String;
+  #61 = Utf8               [Ljava/lang/Thread;
+  #62 = Utf8               java/lang/InterruptedException
+  #63 = Utf8               java/lang/System
+  #64 = Utf8               out
+  #65 = Utf8               Ljava/io/PrintStream;
+  #66 = Utf8               java/io/PrintStream
+  #67 = Utf8               println
+  #68 = Utf8               (I)V
+  #69 = Utf8               (Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #70 = Utf8               (Ljava/lang/Runnable;)V
+  #71 = Utf8               start
+  #72 = Utf8               await
+  #73 = Utf8               (Ljava/lang/String;)V
+{
+  private java.lang.String a;
+    descriptor: Ljava/lang/String;
+    flags: ACC_PRIVATE
+
+  private int i;
+    descriptor: I
+    flags: ACC_PRIVATE
+
+  public com.lianjia.service.Jvm();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aconst_null
+         6: putfield      #2                  // Field a:Ljava/lang/String;
+         9: aload_0
+        10: iconst_0
+        11: putfield      #3                  // Field i:I
+        14: return
+      LineNumberTable:
+        line 5: 0
+        line 6: 4
+        line 7: 9
+
+  public void getA();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=1, args_size=1
+         0: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: aload_0
+         4: dup
+         5: getfield      #3                  // Field i:I
+         8: dup_x1
+         9: iconst_1
+        10: iadd
+        11: putfield      #3                  // Field i:I
+        14: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+        17: return
+      LineNumberTable:
+        line 10: 0
+        line 11: 17
+
+  public static void main(java.lang.String[]) throws java.lang.InterruptedException;
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=9, args_size=1
+         0: bipush        100
+         2: anewarray     #6                  // class java/lang/Thread
+         5: astore_1
+         6: new           #7                  // class com/lianjia/service/Jvm
+         9: dup
+        10: invokespecial #8                  // Method "<init>":()V
+        13: astore_2
+        14: new           #9                  // class java/util/concurrent/CountDownLatch
+        17: dup
+        18: bipush        100
+        20: invokespecial #10                 // Method java/util/concurrent/CountDownLatch."<init>":(I)V
+        23: astore_3
+        24: aload_1
+        25: astore        4
+        27: aload         4
+        29: arraylength
+        30: istore        5
+        32: iconst_0
+        33: istore        6
+        35: iload         6
+        37: iload         5
+        39: if_icmpge     82
+        42: aload         4
+        44: iload         6
+        46: aaload
+        47: astore        7
+        49: new           #11                 // class com/lianjia/service/Jvm$run
+        52: dup
+        53: aload_2
+        54: aload_3
+        55: invokespecial #12                 // Method com/lianjia/service/Jvm$run."<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+        58: astore        8
+        60: new           #6                  // class java/lang/Thread
+        63: dup
+        64: aload         8
+        66: invokespecial #13                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+        69: astore        7
+        71: aload         7
+        73: invokevirtual #14                 // Method java/lang/Thread.start:()V
+        76: iinc          6, 1
+        79: goto          35
+        82: aload_3
+        83: invokevirtual #15                 // Method java/util/concurrent/CountDownLatch.await:()V
+        86: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        89: ldc           #16                 // String done
+        91: invokevirtual #17                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        94: return
+      LineNumberTable:
+        line 30: 0
+        line 31: 6
+        line 32: 14
+        line 33: 24
+        line 34: 49
+        line 35: 60
+        line 36: 71
+        line 33: 76
+        line 38: 82
+        line 39: 86
+        line 40: 94
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 35
+          locals = [ class "[Ljava/lang/String;", class "[Ljava/lang/Thread;", class com/lianjia/service/Jvm, class java/util/concurrent/CountDownLatch, class "[Ljava/lang/Thread;", int, int ]
+          stack = []
+        frame_type = 248 /* chop */
+          offset_delta = 46
+    Exceptions:
+      throws java.lang.InterruptedException
+}
+SourceFile: "Jvm.java"
+InnerClasses:
+     static #19= #11 of #7; //run=class com/lianjia/service/Jvm$run of class com/lianjia/service/Jvm
+Classfile /C:/Users/admin/IdeaProjects/lottery/src/test/java/com/lianjia/service/Jvm.class
+  Last modified 2018-9-9; size 1176 bytes
+  MD5 checksum 39c0b394b441c9aa2bbce7eac910654f
+  Compiled from "Jvm.java"
+public class com.lianjia.service.Jvm
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #19.#41        // java/lang/Object."<init>":()V
+   #2 = Fieldref           #7.#42         // com/lianjia/service/Jvm.a:Ljava/lang/String;
+   #3 = Fieldref           #7.#43         // com/lianjia/service/Jvm.i:I
+   #4 = Fieldref           #44.#45        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = Methodref          #46.#47        // java/io/PrintStream.println:(I)V
+   #6 = Class              #48            // java/lang/Thread
+   #7 = Class              #49            // com/lianjia/service/Jvm
+   #8 = Methodref          #7.#41         // com/lianjia/service/Jvm."<init>":()V
+   #9 = Class              #50            // java/util/concurrent/CountDownLatch
+  #10 = Methodref          #9.#51         // java/util/concurrent/CountDownLatch."<init>":(I)V
+  #11 = Class              #52            // com/lianjia/service/Jvm$run
+  #12 = Methodref          #11.#53        // com/lianjia/service/Jvm$run."<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #13 = Methodref          #6.#54         // java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+  #14 = Methodref          #6.#55         // java/lang/Thread.start:()V
+  #15 = Methodref          #9.#56         // java/util/concurrent/CountDownLatch.await:()V
+  #16 = Class              #57            // java/lang/Exception
+  #17 = String             #58            // done
+  #18 = Methodref          #46.#59        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #19 = Class              #60            // java/lang/Object
+  #20 = Utf8               run
+  #21 = Utf8               InnerClasses
+  #22 = Utf8               a
+  #23 = Utf8               Ljava/lang/String;
+  #24 = Utf8               i
+  #25 = Utf8               I
+  #26 = Utf8               <init>
+  #27 = Utf8               ()V
+  #28 = Utf8               Code
+  #29 = Utf8               LineNumberTable
+  #30 = Utf8               getA
+  #31 = Utf8               main
+  #32 = Utf8               ([Ljava/lang/String;)V
+  #33 = Utf8               StackMapTable
+  #34 = Class              #61            // "[Ljava/lang/String;"
+  #35 = Class              #62            // "[Ljava/lang/Thread;"
+  #36 = Class              #49            // com/lianjia/service/Jvm
+  #37 = Class              #50            // java/util/concurrent/CountDownLatch
+  #38 = Class              #57            // java/lang/Exception
+  #39 = Utf8               SourceFile
+  #40 = Utf8               Jvm.java
+  #41 = NameAndType        #26:#27        // "<init>":()V
+  #42 = NameAndType        #22:#23        // a:Ljava/lang/String;
+  #43 = NameAndType        #24:#25        // i:I
+  #44 = Class              #63            // java/lang/System
+  #45 = NameAndType        #64:#65        // out:Ljava/io/PrintStream;
+  #46 = Class              #66            // java/io/PrintStream
+  #47 = NameAndType        #67:#68        // println:(I)V
+  #48 = Utf8               java/lang/Thread
+  #49 = Utf8               com/lianjia/service/Jvm
+  #50 = Utf8               java/util/concurrent/CountDownLatch
+  #51 = NameAndType        #26:#68        // "<init>":(I)V
+  #52 = Utf8               com/lianjia/service/Jvm$run
+  #53 = NameAndType        #26:#69        // "<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #54 = NameAndType        #26:#70        // "<init>":(Ljava/lang/Runnable;)V
+  #55 = NameAndType        #71:#27        // start:()V
+  #56 = NameAndType        #72:#27        // await:()V
+  #57 = Utf8               java/lang/Exception
+  #58 = Utf8               done
+  #59 = NameAndType        #67:#73        // println:(Ljava/lang/String;)V
+  #60 = Utf8               java/lang/Object
+  #61 = Utf8               [Ljava/lang/String;
+  #62 = Utf8               [Ljava/lang/Thread;
+  #63 = Utf8               java/lang/System
+  #64 = Utf8               out
+  #65 = Utf8               Ljava/io/PrintStream;
+  #66 = Utf8               java/io/PrintStream
+  #67 = Utf8               println
+  #68 = Utf8               (I)V
+  #69 = Utf8               (Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+  #70 = Utf8               (Ljava/lang/Runnable;)V
+  #71 = Utf8               start
+  #72 = Utf8               await
+  #73 = Utf8               (Ljava/lang/String;)V
+{
+  private java.lang.String a;
+    descriptor: Ljava/lang/String;
+    flags: ACC_PRIVATE
+
+  private int i;
+    descriptor: I
+    flags: ACC_PRIVATE
+
+  public com.lianjia.service.Jvm();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aconst_null
+         6: putfield      #2                  // Field a:Ljava/lang/String;
+         9: aload_0
+        10: iconst_0
+        11: putfield      #3                  // Field i:I
+        14: return
+      LineNumberTable:
+        line 5: 0
+        line 6: 4
+        line 7: 9
+
+  public void getA();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=5, locals=1, args_size=1
+         0: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         3: aload_0
+         4: dup
+         5: getfield      #3                  // Field i:I
+         8: dup_x1
+         9: iconst_1
+        10: iadd
+        11: putfield      #3                  // Field i:I
+        14: invokevirtual #5                  // Method java/io/PrintStream.println:(I)V
+        17: return
+      LineNumberTable:
+        line 10: 0
+        line 11: 17
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=9, args_size=1
+         0: bipush        100
+         2: anewarray     #6                  // class java/lang/Thread
+         5: astore_1
+         6: new           #7                  // class com/lianjia/service/Jvm
+         9: dup
+        10: invokespecial #8                  // Method "<init>":()V
+        13: astore_2
+        14: new           #9                  // class java/util/concurrent/CountDownLatch
+        17: dup
+        18: bipush        100
+        20: invokespecial #10                 // Method java/util/concurrent/CountDownLatch."<init>":(I)V
+        23: astore_3
+        24: aload_1
+        25: astore        4
+        27: aload         4
+        29: arraylength
+        30: istore        5
+        32: iconst_0
+        33: istore        6
+        35: iload         6
+        37: iload         5
+        39: if_icmpge     82
+        42: aload         4
+        44: iload         6
+        46: aaload
+        47: astore        7
+        49: new           #11                 // class com/lianjia/service/Jvm$run
+        52: dup
+        53: aload_2
+        54: aload_3
+        55: invokespecial #12                 // Method com/lianjia/service/Jvm$run."<init>":(Lcom/lianjia/service/Jvm;Ljava/util/concurrent/CountDownLatch;)V
+        58: astore        8
+        60: new           #6                  // class java/lang/Thread
+        63: dup
+        64: aload         8
+        66: invokespecial #13                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+        69: astore        7
+        71: aload         7
+        73: invokevirtual #14                 // Method java/lang/Thread.start:()V
+        76: iinc          6, 1
+        79: goto          35
+        82: aload_3
+        83: invokevirtual #15                 // Method java/util/concurrent/CountDownLatch.await:()V
+        86: goto          91
+        89: astore        4
+        91: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        94: ldc           #17                 // String done
+        96: invokevirtual #18                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        99: return
+      Exception table:
+         from    to  target type
+            82    86    89   Class java/lang/Exception
+      LineNumberTable:
+        line 30: 0
+        line 31: 6
+        line 32: 14
+        line 33: 24
+        line 34: 49
+        line 35: 60
+        line 36: 71
+        line 33: 76
+        line 39: 82
+        line 42: 86
+        line 40: 89
+        line 43: 91
+        line 44: 99
+      StackMapTable: number_of_entries = 4
+        frame_type = 255 /* full_frame */
+          offset_delta = 35
+          locals = [ class "[Ljava/lang/String;", class "[Ljava/lang/Thread;", class com/lianjia/service/Jvm, class java/util/concurrent/CountDownLatch, class "[Ljava/lang/Thread;", int, int ]
+          stack = []
+        frame_type = 248 /* chop */
+          offset_delta = 46
+        frame_type = 70 /* same_locals_1_stack_item */
+          stack = [ class java/lang/Exception ]
+        frame_type = 1 /* same */
+}
+SourceFile: "Jvm.java"
+InnerClasses:
+     static #20= #11 of #7; //run=class com/lianjia/service/Jvm$run of class com/lianjia/service/Jvm
