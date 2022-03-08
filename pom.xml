@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-scratchpad</artifactId>
-			<version>3.7</version>
+			<version>5.2.1</version>
 		</dependency>
 		<!-- http get post -->
 		<!-- <dependency> <groupId>org.apache.httpcomponents</groupId> <artifactId>httpcore</artifactId> 
